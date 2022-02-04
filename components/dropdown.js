@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons'
 import { useWeb3React } from "@web3-react/core"
 import { faTwitter, faDiscord, faTelegram } from '@fortawesome/free-brands-svg-icons'  
-import { injected } from '../components/connectors'
-import { useLoginState } from '../components/provider'
+import { injected } from './connectors'
+import { useLoginState } from './provider'
 
 
 export function Dropdown({handleClose, handleDark, handleWallet}){
