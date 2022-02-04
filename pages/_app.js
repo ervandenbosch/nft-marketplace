@@ -6,10 +6,10 @@ import { useWeb3React } from "@web3-react/core"
 import Web3 from 'web3'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faXmark, faMoon, faSun, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons'
-import { Dropdown } from './dropdown'
-import { Wallet } from './wallet'
-import { Footer } from './footer'
-import { Searchbar } from './searchbar'
+import { Dropdown } from '../components/dropdown'
+import { Wallet } from '../components/wallet'
+import { Footer } from '../components/footer'
+import { Searchbar } from '../components/searchbar'
 import { AppWrapper } from '../components/provider'
 
 export default function App({Component, pageProps}){

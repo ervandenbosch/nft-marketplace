@@ -1,9 +1,5 @@
-import { useWeb3React } from '@web3-react/core'
-import { injected, connect, disconnect } from '../components/connectors'
-import Web3 from 'web3'
-import { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEthereum } from '@fortawesome/free-brands-svg-icons'
+import { injected } from '../components/connectors'
+import { useState } from 'react'
 import { useLoginState } from '../components/provider'
 
 export default function Profile() {
