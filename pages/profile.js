@@ -14,8 +14,6 @@ export default function Profile() {
 
   const handleBalance = () => setBalance(!balance)
 
-  const { active, account, library, connector, activate, deactivate } = useWeb3React()
-
   const information = useLoginState();
 
   async function connect() {
@@ -49,17 +47,9 @@ return(
 <div className={"w-2/5 flex flex-col justify-between m-auto  mt-6 border border-gray-400 rounded-t-lg " + (balance ? 'hidden' : '""')}>
       <div className="w-full flex flex-row">
         <div className="p-3">
-     <FontAwesomeIcon icon={faEthereum} color="text-gray-400" size="lg"/></div>
-    <div className="inline-block text-left py-1"><b>ETH</b><br />
-    Ethereum
-    </div>
-  <div className="py-1 pr-3 ml-auto " id="outputEth">{information.balance}<br /></div>
-  </div>
-  <div className="w-full flex flex-row border-t border-gray-400">
-        <div className="p-2 pt-4">
-     <img src="https://tinyimg.io/i/qd3GlMi.png" width="20px" /></div>
+        <img src="https://tinyimg.io/i/qd3GlMi.png" width="20px" /></div>
     <div className="inline-block text-left py-1"><b>Matic</b><br />
-    Ethereum
+    Polygon
     </div>
   <div className="py-1 pr-3 ml-auto " id="outputEth">{information.balance}<br /></div>
   </div>

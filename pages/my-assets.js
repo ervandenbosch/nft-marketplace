@@ -64,7 +64,7 @@ export default function MyAssets() {
 <div className={(dark ? "dark" : '" "') + ' bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-600'}>
     <div className="mt-20 flex flex-row justify-center">   
      <div className="p-8" style={{ maxWidth: '1600px' }}>
-     <div className="flex flex-wrap flex-cols-5 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+     <div className="flex flex-wrap flex-cols-5 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4">
        {
             nfts.map((nft, i) => (
               <div key={i} className="w-64 border rounded-xl overflow-hidden max-h-">

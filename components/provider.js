@@ -8,7 +8,7 @@ export function AppWrapper({ children, connected })  {
 
 const { active, account, library, connector, activate, deactivate } = useWeb3React()
 
-const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+const web3 = new Web3(new Web3.providers.HttpProvider("https://rpc-mumbai.maticvigil.com"));
 
 const [balance, setBalance] = useState();
 const [accountEth, setAccountEth] = useState();

@@ -16,77 +16,23 @@ export function Wallet({closeWallet}){
   const [connected, setConnected] = useState()
 
   const handleBalance = () => setBalance(!balance)
-  
-  const { active, account, library, connector, activate, deactivate } = useWeb3React()
 
-  const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-
-  useEffect(() => {
-    checkWalletIsConnected();
-    if (window.ethereum) {
-      setAccountListener(window.ethereum);
-      console.log('Wallet exists.')
-    } else {
-      alert('Install Metamask')
-    }
-  }, [])
-
-  async function checkWalletIsConnected() {
-    const { ethereum } = window;
-  
-    if (!ethereum) {
-      alert('Install Metamask')
-      return;
-    }
-    else {
-      console.log('Wallet exists.')
-    }
-   const accounts = await ethereum.request({ method: 'eth_accounts'})
-  if (accounts.length !== 0){
-    const metamaskAccount = accounts[0]
-    console.log("Found a connected account! Address: ", metamaskAccount);
-    setConnected(true)
-    setCurrentAccount(metamaskAccount);
-    loadBalance(metamaskAccount);
-      } else {
-        console.log("No connected account found")
-      }
-      
-    }
+  const information = useLoginState();
 
   async function connect() {
-    checkWalletIsConnected()
+    setConnected(true);
     try {
       await activate(injected)
-      setConnected(true)
     } catch (ex) {
       console.log(ex)
     }
+    
   }
 
   async function disconnect(){
     setCurrentAccount(false)
   }
 
- async function loadBalance(currentAccount) {
-    var result
-    try {
-     await web3.eth.getBalance(currentAccount, function (error, result) {
-          if (!error) {
-            var balance = web3.utils.fromWei(result, 'ether').substring(0,6);
-            document.getElementById("outputEth").innerHTML = balance;
-            console.log(balance)
-          }
-      });
-  } catch (error) {
-      alert(error);
-  }
-  }
-
-  const setAccountListener = (provider) => {
-    provider.on("accountsChanged", (_) => window.location.reload());
-    provider.on("chainChanged", (_) => window.location.reload());
-  };
   
   return (
     <div className={dark ? "dark" : '" "'}>
@@ -98,24 +44,24 @@ export function Wallet({closeWallet}){
           Back
         </button>
         </div>
-      {currentAccount && <div className="absolute right-10"><p>{currentAccount.substring(0,6).concat('...').concat(currentAccount.substring(39,42))}</p></div>}
+      {information.balance === undefined && <div className="absolute right-10"><p>{information.balance.substring(0,6).concat('...').concat(information.balance.substring(39,42))}</p></div>}
       </div>
       <div className="flex flex-col text-center self-center">
-    {!currentAccount && 
+    {information.balance === undefined && 
 <button className="bg-blue-400 mt-24 dark:bg-gray-100 rounded-xl text-white dark:text-gray-900 max-w-1/4 p-2" onClick={connect}> Connect with Metamask
           </button> }
 </div>
-{currentAccount && 
+{information.balance !== undefined && 
 <div className="text-center mt-16">
 <div className={"w-2/3 flex flex-row m-auto justify-between mt-6 border border-gray-400 rounded-t-lg " + (balance ? 'hidden' : '""')}>
-      <div className="flex flex-row">
-        <div className="p-3">
-     <FontAwesomeIcon icon={faEthereum} color="text-gray-400" size="1x"/></div>
-    <div className="text-left py-1"><b>ETH</b><br />
-    Ethereum
-    </div></div>
-  <div className="py-1 pr-3" id="outputEth"> <br />
-  </div> 
+<div className="w-full flex flex-row">
+      <div className="p-3">
+        <img src="https://tinyimg.io/i/qd3GlMi.png" width="20px" /></div>
+    <div className="inline-block text-left py-1"><b>Matic</b><br />
+    Polygon
+    </div>
+  <div className="py-1 pr-3 ml-auto" id="outputEth">{information.balance}<br /></div>
+  </div>
   </div>
    <div className="pt-10 text-center">
    <button className="w-40 border-2 border-blue-400 dark:border-gray-200 bg-white dark:bg-gray-900 rounded-xl text-blue-400 dark:text-gray-200 p-2 m-5" onClick={handleBalance}> {balance ? 'Show balances' : 'Hide balances' }</button>
