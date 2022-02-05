@@ -11,12 +11,12 @@ return (
   <div className={(dark ? "dark" : '" "') + ' bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-600'}>
     <div className="pt-20 flex flex-row justify-between md:justify-center md:flex-wrap">
     <div className="flex flex-col md:text-center flex-none w-2/5 md:w-2/3 ml-10 md:ml-0 mt-20 md:mt-10 xs:w-4/5">
-      <h1 className="font-bold text-5xl lg:text-4xl text-gray-800  dark:text-gray-300">
+      <h1 className="font-bold text-5xl lg:text-4xl text-gray-800  dark:text-gray-300 xl2:mt-14">
         Discover, collect, and sell extraordinary NFTs</h1><br />
       <h2 className="text-2xl text-gray-800 dark:text-gray-300 pr-4">NFTz is the most notorious digital asset marketplace on the web</h2>
       <div className="flex flex-cols-2 mt-10 md:justify-center">
         <Link href="./marketplace">
-          <button className="bg-blue-400 dark:bg-gray-100 rounded-xl text-white dark:text-gray-900 w-1/3 p-2 xs:w-1/2">
+          <button className="bg-blue-400 dark:bg-gray-100 rounded-xl text-white dark:text-gray-900 w-1/3 xs:w-1/2">
             Explore </button></Link>
         <Link href="./create-item"><button className="border-2 border-blue-400 dark:border-gray-200 bg-white dark:bg-gray-900 rounded-xl text-blue-400 dark:text-gray-200 w-1/3 ml-4 p-2 xs:w-1/2 xs:p-3">Create NFT
         </button></Link>
