@@ -82,18 +82,18 @@ export default function Marketplace() {
           {
             nfts.map((nft, i) => (
               <button onClick={() => buyNft(nft)}>
-              <div key={i} className="w-64 border bg-white dark:bg-gray-900 hover:shadow rounded-xl overflow-hidden xs:w-32">
-                <img src={nft.image} className="h-64 mx-auto xs:h-32" />
+              <div key={i} className="w-64 border bg-white dark:bg-gray-900 hover:shadow rounded-xl overflow-hidden xs:w-48">
+                <img src={nft.image} className="h-64 mx-auto xs:h-48" />
                 <div className="flex flex-row justify-between border-t">
                   <div className="flex flex-col p-3 dark:bg-">
-                  <p className="text-2xl font-semibold dark:text-white">{nft.name}</p>
+                  <p className="text-2xl xs:text-lg font-semibold dark:text-white">{nft.name}</p>
                   <div style={{overflow: 'hidden' }}>
-                    <p className="text-gray-400 dark:text-white">{nft.description}</p>
+                    <p className="text-gray-400 dark:text-white xs:text-xs">{nft.description}</p>
                   </div>
                   </div>
                 <div className="p-2 text-sm text-right dark:text-white">
                   Price
-     <div><FontAwesomeIcon icon={faEthereum} className="px-2 text-black" size="lg"/><span className="text-lg py-1 font-bold text-gray-800 dark:text-white">{nft.price} </span></div>
+     <div><FontAwesomeIcon icon={faEthereum} className="px-2 text-black" size="lg"/><span className="text-lg xs:text-sm py-1 font-bold text-gray-800 dark:text-white">{nft.price} </span></div>
                 </div>
               </div>
               </div>
