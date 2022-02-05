@@ -45,6 +45,7 @@ useEffect(() => {
     console.log('Wallet exists.')
   } else {
     alert('Install Metamask')
+    return;
   }
 checkWalletIsConnected();
 }, [])
