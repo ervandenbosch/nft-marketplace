@@ -78,11 +78,11 @@ export default function Marketplace() {
   return (
     <div className={(dark ? "dark" : '" "') + ' bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-600 min-h-screen'}>  <div className=" pt-24 mb-10 flex justify-center">
       <div className="p-4" style={{ maxWidth: '1600px' }}>
-        <div className="flex flex-wrap flex-cols-5 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+        <div className="flex flex-wrap flex-cols-5 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 justify-center">
           {
             nfts.map((nft, i) => (
               <button onClick={() => buyNft(nft)}>
-              <div key={i} className="w-64 border bg-white dark:bg-gray-900 hover:shadow rounded-xl overflow-hidden justify-center">
+              <div key={i} className="w-64 border bg-white dark:bg-gray-900 hover:shadow rounded-xl overflow-hidden ">
                 <img src={nft.image} className="h-64 mx-auto" />
                 <div className="flex flex-row justify-between border-t">
                   <div className="flex flex-col p-3 dark:bg-">
