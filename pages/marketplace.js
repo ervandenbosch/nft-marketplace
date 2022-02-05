@@ -82,8 +82,8 @@ export default function Marketplace() {
           {
             nfts.map((nft, i) => (
               <button onClick={() => buyNft(nft)}>
-              <div key={i} className="w-64 border bg-white dark:bg-gray-900 hover:shadow rounded-xl overflow-hidden ">
-                <img src={nft.image} className="h-64 mx-auto" />
+              <div key={i} className="w-64 border bg-white dark:bg-gray-900 hover:shadow rounded-xl overflow-hidden xs:w-32">
+                <img src={nft.image} className="h-64 mx-auto xs:h-32" />
                 <div className="flex flex-row justify-between border-t">
                   <div className="flex flex-col p-3 dark:bg-">
                   <p className="text-2xl font-semibold dark:text-white">{nft.name}</p>
