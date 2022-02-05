@@ -14,14 +14,6 @@ const [balance, setBalance] = useState();
 const [accountEth, setAccountEth] = useState();
 
 async function checkWalletIsConnected() {
-  const { ethereum } = window;
-  if (!ethereum) {
-    alert('Install Metamask')
-    return;
-  }
-  else {
-    console.log('Wallet exists.')
-  }
  const accounts = await ethereum.request({ method: 'eth_accounts'})
 if (accounts.length !== 0){
   const metamaskAccount = accounts[0]
@@ -55,7 +47,7 @@ useEffect(() => {
     alert('Install Metamask')
   }
 checkWalletIsConnected();
-}, [connected])
+}, [])
 
 const setAccountListener = (provider) => {
 provider.on("accountsChanged", (_) => window.location.reload());
