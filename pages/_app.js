@@ -89,9 +89,9 @@ function getLibrary(provider) {
             <FontAwesomeIcon icon={dark ? faToggleOn : faToggleOff } size="lg" color={dark ? "gray-200" : "gray-600"} className="px-2" />
           </button>
           </span> 
-          <span className={"sm:absolute sm:right-5 md:relative m-2 " + (open ?  '': 'xl2:hidden')}>
+          <span className={"mt-3 sm:absolute sm:right-5 md:relative m-2 " + (open ?  '': 'xl2:hidden')}>
           <button onClick={!open ? handleOpen : closeAll}>
-            <FontAwesomeIcon icon={open ? faXmark : faBars} size="lg" className={dark ? "text-gray-200" : "text-gray-600"} />
+            <FontAwesomeIcon icon={open ? faXmark : faBars} size="xl" className={dark ? "text-gray-200" : "text-gray-600"} />
           </button>
           </span>
           <Web3ReactProvider getLibrary={getLibrary} >
