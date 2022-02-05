@@ -2,7 +2,6 @@ import '../styles/globals.css'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { Web3ReactProvider } from '@web3-react/core'
-import { useWeb3React } from "@web3-react/core"
 import Web3 from 'web3'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faXmark, faMoon, faSun, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons'
@@ -18,7 +17,7 @@ export default function App({Component, pageProps}){
   const [dark, setDark] = useState(false)
   const [balance, setBalance] = useState()
   const [selected, setSelected] = useState("")
-  const { active, account, library, connector, activate, deactivate } = useWeb3React()
+  
   const [currentAccount, setCurrentAccount] = useState(null);
   const [connected, setConnected] = useState(null)
 
@@ -45,14 +44,8 @@ function getLibrary(provider) {
   return new Web3(provider)
 }
 
-useEffect(() => {
-  window.ethereum.on('disconnect', async () => {
-    window.location.reload();
-  })
-})
-
   return (
-    <AppWrapper connected={connected}>
+    <AppWrapper dark={dark}>
     <Web3ReactProvider getLibrary={getLibrary} >
     <div className={(dark ? "dark min-h-screen" : '"min-h-screen"')} id="app">
       
@@ -63,17 +56,17 @@ useEffect(() => {
           
           <Searchbar placeholder="Search items, collections, and accounts.." />
           <span className="mt-2 font-bold text-gray-600 dark:text-gray-300 float-right sm:hidden">
-          <Link href="/marketplace">
+          <Link href="./marketplace">
             <a className="mr-6" onClick={closeAll}>
               Marketplace
             </a>
           </Link>
-          <Link href="/create-item">
+          <Link href="./create-item">
             <a className="mr-6 md:hidden" onClick={closeAll}>
               Create & sell NFT
             </a>
           </Link>
-          <Link href="/my-assets">
+          <Link href="./my-assets">
             <a className="mr-6 xl:hidden" onClick={closeAll}> 
               My Digital Assets
             </a>
@@ -83,7 +76,7 @@ useEffect(() => {
               History
             </a>
           </Link>
-          <Link href="profile">
+          <Link href="/profile">
             <a className="mr-4 md:hidden" onClick={closeAll}>
               Profile
             </a>

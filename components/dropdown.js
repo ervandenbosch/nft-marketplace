@@ -36,30 +36,30 @@ export function Dropdown({handleClose, handleDark, handleWallet}){
     <div className="fixed top-20 right-0 z-99 flex flex-col text-left w-full lg2:border-blue-100 lg2:w-1/3 lg2:border-l-1 lg2:border-t lg2:drop-shadow-lg bg-white font-bold text-gray-600 dark:bg-gray-900 dark:text-gray-300">
       <div className="relative mt-6 min-h-screen">
       <ul>
-      <li className="pb-8 pl-10 lg:pl-6"><Link href="/marketplace">
+      <li className="pb-8 pl-10 lg:pl-6"><Link href="./marketplace">
             <a onClick={handleClose}>
               Marketplace
             </a>
           </Link></li>
-      <li className="pb-8 pl-10 lg:pl-6"><Link href="/create-item">
+      <li className="pb-8 pl-10 lg:pl-6"><Link href="./create-item">
             <a onClick={handleClose}>
               Create & sell NFT
             </a>
           </Link></li>
           <li className="pb-8 pl-10 lg:pl-6">
-          <Link href="/my-assets">
+          <Link href="./my-assets">
             <a onClick={handleClose}> 
               My Digital Assets
             </a>
           </Link></li>
           <li className="pb-8 pl-10 lg:pl-6">
-          <Link href="/creator-dashboard">
+          <Link href="./creator-dashboard">
             <a  onClick={handleClose}>
               History
             </a>
           </Link></li>
           <li className="pb-8 pl-10 lg:pl-6">
-          <Link href="profile">
+          <Link href="./profile">
             <a  onClick={handleClose}>
               Profile
             </a>

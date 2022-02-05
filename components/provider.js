@@ -4,7 +4,7 @@ import Web3 from 'web3'
 
 const AppContext = createContext();
 
-export function AppWrapper({ children, connected })  {
+export function AppWrapper({ children })  {
 
 const { active, account, library, connector, activate, deactivate } = useWeb3React()
 
@@ -43,11 +43,11 @@ useEffect(() => {
   if (window.ethereum) {
     setAccountListener(window.ethereum);
     console.log('Wallet exists.')
+    checkWalletIsConnected();
   } else {
-    alert('Install Metamask')
+    console.log('Install Metamask')
     return;
   }
-checkWalletIsConnected();
 }, [])
 
 const setAccountListener = (provider) => {
