@@ -62,15 +62,15 @@ export default function CreatorDashboard() {
     </div>
   )
   else if (loadingState === 'not-loaded') return (
-    <div className={(dark ? "dark" : '" "') + ' min-h-screen mt-20 bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
-    <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 py-10 text-3xl">
-     Loading...
+    <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
+    <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 pt-32 text-3xl">
+     Connect a wallet.
    </h1>
    </div>
   )
   return (
     <div className={(dark ? "dark" : '" "') + ' bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-600 min-h-screen'}>  
-    <div className=" mt-20 mb-10 flex justify-center">
+    <div className="pt-20 mb-10 flex justify-center">
       <div className="p-4" style={{ maxWidth: '1600px' }}>
   
         <h2 className="text-center text-3xl font-bold py-2 text-red dark:text-white ">Items Created</h2>
