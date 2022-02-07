@@ -11,7 +11,7 @@ return (
   <div className={(dark ? "dark" : '" "') + ' bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-600'}>
     <div className="pt-20 flex flex-row justify-between md:justify-center md:flex-wrap">
     <div className="flex flex-col md:text-center flex-none w-2/5 md:w-2/3 ml-10 md:ml-0 mt-20 md:mt-10 xs:w-4/5">
-      <h1 className="font-bold text-5xl lg:text-4xl text-gray-800  dark:text-gray-300 xl2:mt-14">
+      <h1 className="font-bold text-5xl lg:text-4xl text-gray-800  dark:text-gray-300 xl2:mt-12">
         Discover, collect, and sell extraordinary NFTs</h1><br />
       <h2 className="text-2xl text-gray-800 dark:text-gray-300 pr-4">NFTz is the most notorious digital asset marketplace on the web</h2>
       <div className="flex flex-cols-2 mt-10 md:justify-center">
@@ -22,7 +22,7 @@ return (
         </button></Link>
       </div>
     </div>
-    <div className="mr-6 md:mr-0 mt-20 w-1/2 md:w-4/5 max-h-500">
+    <div className="mr-6 md:mr-0 mt-16 w-1/2 md:w-4/5 max-h-500">
       <img src="https://cdn.vox-cdn.com/thumbor/KMraJbkqzbkEAUuTqU5Tvt_1So4=/0x0:3000x3000/1820x1213/filters:focal(1260x1260:1740x1740):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/68948366/2021_NYR_20447_0001_001_beeple_everydays_the_first_5000_days034733_.0.jpg" alt="home_nft" className="rounded-lg" />
     </div>
   </div>

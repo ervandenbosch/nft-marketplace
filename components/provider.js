@@ -4,7 +4,7 @@ import Web3 from 'web3'
 
 const AppContext = createContext();
 
-export function AppWrapper({ children })  {
+export function AppWrapper({ children, query })  {
 
 const { active, account, library, connector, activate, deactivate } = useWeb3React()
 
@@ -48,7 +48,7 @@ useEffect(() => {
     console.log('Install Metamask')
     return;
   }
-}, [])
+}, [query])
 
 const setAccountListener = (provider) => {
 provider.on("accountsChanged", (_) => window.location.reload());
@@ -56,7 +56,7 @@ provider.on("chainChanged", (_) => window.location.reload());
 };
 
 
-const state = {balance, accountEth}
+const state = {balance, accountEth, query}
 
 console.log(state);
 

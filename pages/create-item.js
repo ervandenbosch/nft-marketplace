@@ -82,7 +82,7 @@ export default function CreateItem() {
     
     <div className={dark ? "dark" : '" "'}>
     <div className="min-h-screen mt-20 flex justify-center bg-white dark:bg-gray-800">
-      <div className="mt-6 w-1/2 flex flex-col pb-12">
+      <div className="mt-6 w-1/2 xs:w-2/3 flex flex-col pb-12">
         <input 
           placeholder="Asset Name.."
           className="mt-8 border rounded p-4"

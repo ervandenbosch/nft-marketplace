@@ -4,7 +4,7 @@ import axios from 'axios'
 import Web3Modal from "web3modal"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEthereum } from '@fortawesome/free-brands-svg-icons'
-
+import { useLoginState } from '../components/provider'
 import {
   nftaddress, nftmarketaddress
 } from '../config'
@@ -16,9 +16,16 @@ export default function Marketplace() {
   const [dark, setDark] = useState(false)
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
+
+  const infoState = useLoginState()
+  console.log(infoState);
+  var query = infoState.query;
+  console.log(query)
+
   useEffect(() => {
     loadNFTs()
-  }, [])
+  }, [query])
+
   async function loadNFTs() {
     /* create a generic provider and query for unsold market items */
     const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com")
@@ -43,6 +50,7 @@ export default function Marketplace() {
         name: meta.data.name,
         description: meta.data.description,
       }
+
       return item
     }))
     setNfts(items)
@@ -64,23 +72,35 @@ export default function Marketplace() {
     await transaction.wait()
     loadNFTs()
   }
+
   if (loadingState === 'loaded' && !nfts.length) return (
     <div className={(dark ? "dark" : '" "') + ' min-h-screen mt-20 bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
-    <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 py-10 text-3xl">No items in marketplace yet..</h1></div>
+    <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 pt-32 text-3xl">No items in marketplace yet..</h1></div>
   )  
   else if (loadingState === 'not-loaded') return (
     <div className={(dark ? "dark" : '" "') + ' min-h-screen mt-20 bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
-    <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 py-10 text-3xl">
+    <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 pt-32 text-3xl">
      Loading...
    </h1>
    </div>
-  )
+  ) 
+  else if (loadingState === 'loaded' && nfts.length && query) {
+let nftsFilter = nfts.filter(nft => nft.name === query)
+if(nftsFilter.length === 0) {
+  return (
+    <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
+    <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 pt-32 text-3xl">
+     No matches..
+   </h1>
+   </div>
+) 
+} else {
   return (
     <div className={(dark ? "dark" : '" "') + ' bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-600 min-h-screen'}>  <div className=" pt-24 mb-10 flex justify-center">
       <div className="p-4" style={{ maxWidth: '1600px' }}>
         <div className="flex flex-wrap flex-cols-5 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 justify-center">
           {
-            nfts.map((nft, i) => (
+            nftsFilter.map((nft, i) => (
               <button onClick={() => buyNft(nft)}>
               <div key={i} className="w-64 border bg-white dark:bg-gray-900 hover:shadow rounded-xl overflow-hidden xs:w-48">
                 <img src={nft.image} className="h-64 mx-auto xs:h-48" />
@@ -104,5 +124,38 @@ export default function Marketplace() {
       </div>
     </div>
     </div>
-  )
+  ) 
+}
+ }
+
+return (
+    <div className={(dark ? "dark" : '" "') + ' bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-600 min-h-screen'}>  <div className="pt-24 mb-10 flex justify-center">
+      <div className="p-4" style={{ maxWidth: '1600px' }}>
+        <div className="flex flex-wrap flex-cols-5 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 justify-center">
+          {
+            nfts.map((nft, i) => (
+              <button onClick={() => buyNft(nft)}>
+              <div key={nft} className="w-64 border bg-white dark:bg-gray-900 hover:shadow rounded-xl overflow-hidden xs:w-48">
+                <img src={nft.image} className="h-64 mx-auto xs:h-48" />
+                <div className="flex flex-row justify-between border-t">
+                  <div className="flex flex-col p-3 dark:bg-">
+                  <p className="text-2xl xs:text-lg font-semibold dark:text-white">{nft.name}</p>
+                  <div style={{overflow: 'hidden' }}>
+                    <p className="text-gray-400 dark:text-white xs:text-xs">{nft.description}</p>
+                  </div>
+                  </div>
+                <div className="p-2 text-sm text-right dark:text-white">
+                  Price
+     <div><FontAwesomeIcon icon={faEthereum} className="px-2 text-black" size="lg"/><span className="text-lg xs:text-sm py-1 font-bold text-gray-800 dark:text-white">{nft.price} </span></div>
+                </div>
+              </div>
+              </div>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    </div>
+  )     
 }
