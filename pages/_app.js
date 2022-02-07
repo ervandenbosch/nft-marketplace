@@ -10,9 +10,11 @@ import { Wallet } from '../components/wallet'
 import { Footer } from '../components/footer'
 import { Searchbar } from '../components/searchbar'
 import { AppWrapper } from '../components/provider'
+import { ProfileDropdown } from '../components/profiledropdown'
 
 export default function App({Component, pageProps}){
   const [open, setOpen] = useState(false)
+  const [profileOpen, setProfileOpen] = useState(false)
   const [wallet, setWallet] = useState(false)
   const [dark, setDark] = useState(false)
   const [balance, setBalance] = useState()
@@ -23,8 +25,8 @@ export default function App({Component, pageProps}){
   const [currentAccount, setCurrentAccount] = useState(null);
   const [connected, setConnected] = useState(null)
 
-  const handleOpen = () => setOpen(!open)
   const handleClose = () => setOpen(false)
+  const closeProfileDropdown = () => setProfileOpen(false)
   const handleDark = () => setDark(!dark)
   const handleWallet = () => setWallet(!wallet)
   const closeWallet = () => setWallet(false)
@@ -41,7 +43,18 @@ export default function App({Component, pageProps}){
 
   function closeAll() {
     handleClose();
+    closeProfileDropdown();
     closeWallet();
+  }
+
+  function handleOpen() {
+    setOpen(!open)
+    setProfileOpen(false)
+  }
+
+  function handleProfileDropdown() {
+    setOpen(false)
+    setProfileOpen(!profileOpen)
   }
 
   function select(event) {
@@ -55,7 +68,7 @@ function getLibrary(provider) {
 }
 
   return (
-    <AppWrapper dark={dark} query={query}>
+    <AppWrapper dark={dark} search={search}>
     <Web3ReactProvider getLibrary={getLibrary} >
     <div className={(dark ? "dark min-h-screen" : '"min-h-screen"')} id="app">
       
@@ -76,21 +89,9 @@ function getLibrary(provider) {
               Create & sell NFT
             </a>
           </Link>
-          <Link href="./my-assets">
-            <a className="mr-6 xl:hidden" onClick={closeAll}> 
-              My Digital Assets
-            </a>
-          </Link>
-          <Link href="/creator-dashboard">
-            <a className="mr-6 xl:hidden" onClick={closeAll}>
-              History
-            </a>
-          </Link>
-          <Link href="/profile">
-            <a className="mr-4 md:hidden" onClick={closeAll}>
+            <button className="mr-4 md:hidden font-bold" onClick={!profileOpen ? handleProfileDropdown : closeAll}>
               Profile
-            </a>
-          </Link>
+            </button>
           </span>
           <span className="mt-2 font-bold text-gray-600 dark:text-gray-300 lg:hidden">
           <FontAwesomeIcon icon={faMoon} size="1x" color={dark ? "gray-200" : "gray-600"} className="ml-2" /> / 
@@ -107,6 +108,8 @@ function getLibrary(provider) {
           <Web3ReactProvider getLibrary={getLibrary} >
           {(open && !wallet) && <Dropdown handleClose={handleClose} handleDark={handleDark} handleWallet={handleWallet} />}
           </Web3ReactProvider>
+
+          {profileOpen && <ProfileDropdown handleProfileDropdown={handleProfileDropdown} />}
       
           <Web3ReactProvider getLibrary={getLibrary} >
           {wallet && <Wallet closeWallet={closeWallet} setWallet={setWallet} handleWallet={handleWallet} handleBalance={handleBalance} handleDark={handleDark}  />}

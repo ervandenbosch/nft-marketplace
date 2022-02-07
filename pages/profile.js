@@ -29,8 +29,8 @@ export default function Profile() {
 
 
 return(
-<div className={(dark ? "dark" : '" "') + ' min-h-screen mt-20 bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
-<div className="min-h-screen bg-white dark:bg-gray-700 dark:text-white flex flex-col justify-content ">
+<div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
+<div className="min-h-screen bg-white dark:bg-gray-700 dark:text-white flex flex-col justify-content pt-20">
 <h1 className="text-center py-10 px-20 text-3xl font-bold">Wallet details</h1>
   <div className="flex flex-col text-center self-center">
     {information.balance === undefined &&

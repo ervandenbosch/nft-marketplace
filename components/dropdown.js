@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons'
 import { useWeb3React } from "@web3-react/core"
@@ -33,7 +33,7 @@ export function Dropdown({handleClose, handleDark, handleWallet}){
 
   return (
     <div className={dark ? "dark" : '""'}>
-    <div className="fixed top-20 right-0 z-99 flex flex-col text-left w-full lg2:border-blue-100 lg2:w-1/3 lg2:border-l-1 lg2:border-t lg2:drop-shadow-lg bg-white font-bold text-gray-600 dark:bg-gray-900 dark:text-gray-300">
+    <div className="fixed top-[74px] right-0 z-99 flex flex-col text-left w-full lg2:border-blue-100 lg2:w-1/3 lg2:border-l-1 lg2:border-t lg2:drop-shadow-lg bg-white font-bold text-gray-600 dark:bg-gray-900 dark:text-gray-300">
       <div className="relative mt-6 min-h-screen">
       <ul>
       <li className="pb-8 pl-10 lg:pl-6"><Link href="./marketplace">

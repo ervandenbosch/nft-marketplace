@@ -19,7 +19,7 @@ export default function Marketplace() {
 
   const infoState = useLoginState()
   console.log(infoState);
-  var query = infoState.query;
+  var query = infoState.search;
   console.log(query)
 
   useEffect(() => {
