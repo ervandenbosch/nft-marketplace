@@ -74,18 +74,18 @@ export default function Marketplace() {
   }
 
   if (loadingState === 'loaded' && !nfts.length) return (
-    <div className={(dark ? "dark" : '" "') + ' min-h-screen mt-20 bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
+    <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
     <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 pt-32 text-3xl">No items in marketplace yet..</h1></div>
   )  
   else if (loadingState === 'not-loaded') return (
-    <div className={(dark ? "dark" : '" "') + ' min-h-screen mt-20 bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
+    <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
     <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 pt-32 text-3xl">
      Loading...
    </h1>
    </div>
   ) 
   else if (loadingState === 'loaded' && nfts.length && query) {
-let nftsFilter = nfts.filter(nft => nft.name === query)
+let nftsFilter = nfts.filter(nft => nft.name.toLowerCase().includes(query.toLowerCase()));
 if(nftsFilter.length === 0) {
   return (
     <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
