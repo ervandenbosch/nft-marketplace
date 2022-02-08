@@ -102,7 +102,7 @@ if(nftsFilter.length === 0) {
           {
             nftsFilter.map((nft, i) => (
               <button onClick={() => buyNft(nft)}>
-              <div key={i} className="w-64 border bg-white dark:bg-gray-900 hover:shadow rounded-xl overflow-hidden xs:w-48">
+              <div key={i} className="w-64 border border-slate-300 dark:border-slate-800 bg-white dark:bg-gray-900 shadow-md hover:shadow-xl rounded-xl overflow-hidden xs:w-48">
                 <img src={nft.image} className="h-64 mx-auto xs:h-48" />
                 <div className="flex flex-row justify-between border-t">
                   <div className="flex flex-col p-3 dark:bg-">
@@ -135,7 +135,7 @@ return (
           {
             nfts.map((nft, i) => (
               <button onClick={() => buyNft(nft)}>
-              <div key={nft} className="w-64 border bg-white dark:bg-gray-900 hover:shadow rounded-xl overflow-hidden xs:w-48">
+              <div key={nft} className="w-64 border border-slate-300 dark:border-slate-800 bg-white dark:bg-gray-900 shadow-md hover:shadow-xl rounded-xl overflow-hidden xs:w-48">
                 <img src={nft.image} className="h-64 mx-auto xs:h-48" />
                 <div className="flex flex-row justify-between border-t">
                   <div className="flex flex-col p-3 dark:bg-">

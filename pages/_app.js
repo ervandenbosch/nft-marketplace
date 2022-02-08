@@ -1,6 +1,5 @@
 import '../styles/globals.css'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Web3ReactProvider } from '@web3-react/core'
 import Web3 from 'web3'
@@ -37,8 +36,6 @@ export default function App({Component, pageProps}){
   const closeWallet = () => setWallet(false)
   const handleBalance = () => setBalance(!balance)
  
-  const router = useRouter()
-
   const updateSearch = e => {
     setSearch(e.target.value)
     }
@@ -47,10 +44,6 @@ export default function App({Component, pageProps}){
       e.preventDefault()
       setQuery(search)
     }
-
-    function redirect(){
-      router.push("./marketplace");
-      }
 
   function closeAll() {
     handleClose();
@@ -89,7 +82,7 @@ function getLibrary(provider) {
         <a className="lg2:ml-2 text-4xl xs:text-2xl xs:mt-1 font-bold text-blue-500 dark:text-blue-300" onClick={closeAll}>NFTz</a>
           </Link>
           
-          <Searchbar placeholder="Search items.." getSearch={getSearch} updateSearch={updateSearch} query={query} redirect={redirect} />
+          <Searchbar placeholder="Search items.." updateSearch={updateSearch} query={query} closeAll={closeAll} />
           <span className="mt-2 font-bold text-gray-600 dark:text-gray-300 float-right xl:hidden">
           <Link href="./marketplace">
             <a className="mr-8" onClick={closeAll}>
