@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Web3ReactProvider } from '@web3-react/core'
 import Web3 from 'web3'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faXmark, faUserCircle, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faXmark, faUserCircle, faWallet } from '@fortawesome/free-solid-svg-icons'
 import { Dropdown } from '../components/dropdown'
 import { Wallet } from '../components/wallet'
 import { Footer } from '../components/footer'
@@ -78,7 +78,7 @@ function getLibrary(provider) {
           </Link>
           
           <Searchbar placeholder="Search items.." getSearch={getSearch} updateSearch={updateSearch} query={query} />
-          <span className="mt-2 font-bold text-gray-600 dark:text-gray-300 float-right lg:hidden">
+          <span className="mt-2 font-bold text-gray-600 dark:text-gray-300 float-right xl:hidden">
           <Link href="./marketplace">
             <a className="mr-8" onClick={closeAll}>
               Marketplace
@@ -100,6 +100,11 @@ function getLibrary(provider) {
             <FontAwesomeIcon icon={faUserCircle} size="2x" className={dark ? "text-gray-200" : "text-gray-600"} />
             </button>
           </span>
+          <span className="md:relative my-1 px-8 xl2:px-4 xl:hidden">
+            <button onClick={!wallet ? handleWallet : closeAll}>
+            <FontAwesomeIcon icon={faWallet} size="2x" className={dark ? "text-gray-200" : "text-gray-600"} />
+            </button>
+          </span>
           <span className="md:relative my-2 px-2 xl2:hidden">
           <button onClick={!open ? handleOpen : closeAll}>
             <FontAwesomeIcon icon={open ? faXmark : faBars} size="xl" className={dark ? "text-gray-200" : "text-gray-600"} />
@@ -107,10 +112,10 @@ function getLibrary(provider) {
           </span>
 
           <Web3ReactProvider getLibrary={getLibrary} >
-          {(open && !wallet) && <Dropdown handleClose={handleClose} handleDark={handleDark} handleWallet={handleWallet} />}
+          {(open && !wallet) && <Dropdown closeAll={closeAll} handleDark={handleDark} handleWallet={handleWallet} />}
           </Web3ReactProvider>
 
-          {profileOpen && <ProfileDropdown />}
+          {profileOpen && <ProfileDropdown closeAll={closeAll} />}
       
           <Web3ReactProvider getLibrary={getLibrary} >
           {wallet && <Wallet closeWallet={closeWallet} setWallet={setWallet} handleWallet={handleWallet} handleBalance={handleBalance} handleDark={handleDark}  />}

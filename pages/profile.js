@@ -32,11 +32,11 @@ return(
 <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400 pt-32'}><h1 className="text-gray-800 dark:text-gray-300 text-center text-3xl font-bold">Wallet details</h1>
   <div className="flex flex-col text-center self-center">
     {information.balance === undefined &&
-<button className="bg-blue-400 dark:bg-gray-100 rounded-xl text-white dark:text-gray-900 max-w-1/4 p-2" onClick={connect}> Connect with Metamask
+<button className="bg-blue-400 dark:bg-gray-100 rounded-xl text-white dark:text-gray-900 mt-10 p-2 self-center" onClick={connect}> Connect with Metamask
           </button> }
 </div>
 {information.balance !== undefined &&
-<div className="text-center mt-10">
+<div className="text-center mt-10 dark:text-white">
 <p><b>Address:</b><br /> {information.accountEth}</p>
 <div className={"w-2/5 flex flex-col justify-between m-auto  mt-6 border border-gray-400 rounded-t-lg " + (balance ? 'hidden' : '""')}>
       <div className="w-full flex flex-row">

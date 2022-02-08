@@ -33,9 +33,9 @@ export function Wallet({closeWallet}){
   
   return (
     <div className={dark ? "dark" : '" "'}>
-    <div className="fixed top-20 right-0 z-100 h-1/2 flex flex-col text-left lg:text-center w-full min-h-screen lg2:w-1/3 lg2:border-l-1 lg2:border-t lg2:drop-shadow-lg  sm2:rounded-bl-lg bg-white text-gray-600 dark:bg-gray-900 dark:text-gray-300 ">
+    <div className="fixed top-[76px] right-0 z-100 h-1/2 flex flex-col text-left lg:text-center w-full min-h-screen lg2:w-1/3 lg2:border-l-1 lg2:border-t lg2:drop-shadow-lg  sm2:rounded-bl-lg bg-white text-gray-600 dark:bg-gray-900 dark:text-gray-300 ">
     <div className="flex flex-row justify-around mt-6">
-      <div className="absolute left-5">
+      <div className="absolute left-5 xl2:hidden">
         <button onClick={closeWallet} className="font-bold "> 
         <FontAwesomeIcon icon={faAngleLeft} size="1x" className="pr-3" />
           Back

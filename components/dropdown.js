@@ -8,7 +8,7 @@ import { injected } from './connectors'
 import { useLoginState } from './provider'
 
 
-export function Dropdown({handleClose, handleDark, handleWallet}){
+export function Dropdown({closeAll, handleDark, handleWallet}){
   const [open, setOpen] = useState(false)  
   const [dark, setDark] = useState(false)
   const [wallet, setWallet] = useState(false)
@@ -37,30 +37,30 @@ export function Dropdown({handleClose, handleDark, handleWallet}){
       <div className="relative mt-6 min-h-screen overflow:auto">
       <ul>
       <li className="pb-8 pl-10 lg:pl-6"><Link href="./marketplace">
-            <a onClick={handleClose}>
+            <a onClick={closeAll}>
               Marketplace
             </a>
           </Link></li>
       <li className="pb-8 pl-10 lg:pl-6"><Link href="./create-item">
-            <a onClick={handleClose}>
+            <a onClick={closeAll}>
               Create & sell NFT
             </a>
           </Link></li>
           <li className="pb-8 pl-10 lg:pl-6">
           <Link href="./my-assets">
-            <a onClick={handleClose}> 
+            <a onClick={closeAll}> 
               My Digital Assets
             </a>
           </Link></li>
           <li className="pb-8 pl-10 lg:pl-6">
           <Link href="./creator-dashboard">
-            <a  onClick={handleClose}>
+            <a  onClick={closeAll}>
               History
             </a>
           </Link></li>
           <li className="pb-8 pl-10 lg:pl-6">
           <Link href="./profile">
-            <a  onClick={handleClose}>
+            <a  onClick={closeAll}>
               Profile
             </a>
           </Link>
