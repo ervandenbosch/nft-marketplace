@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { injected } from "../components/connectors"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import { faAngleLeft, faTwitter, faDiscord, faTelegram } from '@fortawesome/free-brands-svg-icons' 
 import { useLoginState } from '../components/provider'
 
 export function Wallet({closeWallet}){
@@ -33,7 +33,7 @@ export function Wallet({closeWallet}){
   
   return (
     <div className={dark ? "dark" : '" "'}>
-    <div className="fixed top-[76px] right-0 z-100 h-1/2 flex flex-col text-left lg:text-center w-full min-h-screen lg2:w-1/3 lg2:border-l-1 lg2:border-t lg2:drop-shadow-lg  sm2:rounded-bl-lg bg-white text-gray-600 dark:bg-gray-900 dark:text-gray-300 ">
+    <div className="fixed top-[76px] right-0 z-100 h-1/2 flex flex-col justify-between text-left lg:text-center w-full min-h-screen lg2:w-1/3 lg2:border-l-1 lg2:border-t lg2:drop-shadow-lg  sm2:rounded-bl-lg bg-white text-gray-600 dark:bg-gray-900 dark:text-gray-300 ">
     <div className="flex flex-row justify-around mt-6">
       <div className="absolute left-5 xl2:hidden">
         <button onClick={closeWallet} className="font-bold "> 
@@ -41,11 +41,11 @@ export function Wallet({closeWallet}){
           Back
         </button>
         </div>
-      {information.balance === undefined && <div className="absolute right-10"><p>{information.balance.substring(0,6).concat('...').concat(information.balance.substring(39,42))}</p></div>}
+      {information.balance !== undefined && <div className="absolute right-10"><p>{information.accountEth.substring(0,6).concat('...').concat(information.accountEth.substring(39,42))}</p></div>}
       </div>
       <div className="flex flex-col text-center self-center">
     {information.balance === undefined && 
-<button className="bg-blue-400 mt-24 dark:bg-gray-100 rounded-xl text-white dark:text-gray-900 max-w-1/4 p-2" onClick={connect}> Connect with Metamask
+<button className="bg-blue-400 dark:bg-gray-100 rounded-xl text-white dark:text-gray-900 max-w-1/4 p-2" onClick={connect}> Connect with Metamask
           </button> }
 </div>
 {information.balance !== undefined && 
@@ -65,6 +65,11 @@ export function Wallet({closeWallet}){
 <button className="w-40 border-2 border-blue-400 dark:border-gray-200 bg-white dark:bg-gray-900 rounded-xl text-blue-400 dark:text-gray-200 p-2 m-5" onClick={disconnect}>
 Disconnect
 </button></div></div>}
+<div className="bg-white dark:bg-gray-900 border-t border-gray-200 mb-16 py-8 w-full text-center">
+  <FontAwesomeIcon icon={faTwitter} size="2x" className="px-3 text-blue-500 dark:text-white" />
+ <FontAwesomeIcon icon={faDiscord} size="2x" className="px-3 text-blue-500 dark:text-white" />
+<FontAwesomeIcon icon={faTelegram} size="2x" className="px-3 text-blue-500  dark:text-white" />
+    </div>
           </div>
 </div>   
 )
