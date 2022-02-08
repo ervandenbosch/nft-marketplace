@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Web3ReactProvider } from '@web3-react/core'
 import Web3 from 'web3'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faXmark, faMoon, faSun, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faXmark, faUserCircle, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons'
 import { Dropdown } from '../components/dropdown'
 import { Wallet } from '../components/wallet'
 import { Footer } from '../components/footer'
@@ -59,7 +59,7 @@ export default function App({Component, pageProps}){
 
   function select(event) {
     const value = event.target.textContent;
-    handleClose();
+    closeAll();
     setSelected(value);
 }
 
@@ -74,42 +74,43 @@ function getLibrary(provider) {
       
       <nav className="fixed top-0 z-100 h-18 w-full flex flex-row flex-nowrap border-b shadow-sm shadow-blue-200 p-4  bg-white dark:bg-gray-900 ">
       <Link href="/">
-        <a className="ml-6 sm:ml-0 text-4xl xs:text-2xl xs:mt-1 font-bold text-blue-500 dark:text-blue-300" onClick={handleClose}>NFTz</a>
+        <a className="lg2:ml-2 text-4xl xs:text-2xl xs:mt-1 font-bold text-blue-500 dark:text-blue-300" onClick={closeAll}>NFTz</a>
           </Link>
           
           <Searchbar placeholder="Search items.." getSearch={getSearch} updateSearch={updateSearch} query={query} />
-          <span className="mt-2 font-bold text-gray-600 dark:text-gray-300 float-right sm:hidden">
+          <span className="mt-2 font-bold text-gray-600 dark:text-gray-300 float-right lg:hidden">
           <Link href="./marketplace">
-            <a className="mr-6" onClick={closeAll}>
+            <a className="mr-8" onClick={closeAll}>
               Marketplace
             </a>
           </Link>
           <Link href="./create-item">
-            <a className="mr-6 lg:hidden" onClick={closeAll}>
-              Create & sell NFT
+            <a className="mr-8" onClick={closeAll}>
+              Create NFT
             </a>
           </Link>
-            <button className="mr-4 md:hidden font-bold" onClick={!profileOpen ? handleProfileDropdown : closeAll}>
-              Profile
+          <Link href="./#how-to">
+            <a className="mr-4" onClick={closeAll}>
+              Resources
+            </a>
+          </Link>
+          </span>
+          <span className="md:relative my-1 px-8 xl2:px-4 sm:hidden">
+            <button onClick={!profileOpen ? handleProfileDropdown : closeAll}>
+            <FontAwesomeIcon icon={faUserCircle} size="2x" className={dark ? "text-gray-200" : "text-gray-600"} />
             </button>
           </span>
-          <span className="mt-2 font-bold text-gray-600 dark:text-gray-300 lg:hidden">
-          <FontAwesomeIcon icon={faMoon} size="1x" color={dark ? "gray-200" : "gray-600"} className="ml-2" /> / 
-          <FontAwesomeIcon icon={faSun} size="1x" color={dark ? "gray-200" : "gray-600"} className="pl-2" /> 
-            <button onClick={handleDark}>
-            <FontAwesomeIcon icon={dark ? faToggleOn : faToggleOff } size="lg" color={dark ? "gray-200" : "gray-600"} className="px-2" />
-          </button>
-          </span> 
-          <span className={"mt-2 sm:mr-3 md:relative m-2 flex-0" + (open ?  '': 'xl2:hidden')}>
+          <span className="md:relative my-2 px-2 xl2:hidden">
           <button onClick={!open ? handleOpen : closeAll}>
             <FontAwesomeIcon icon={open ? faXmark : faBars} size="xl" className={dark ? "text-gray-200" : "text-gray-600"} />
           </button>
           </span>
+
           <Web3ReactProvider getLibrary={getLibrary} >
           {(open && !wallet) && <Dropdown handleClose={handleClose} handleDark={handleDark} handleWallet={handleWallet} />}
           </Web3ReactProvider>
 
-          {profileOpen && <ProfileDropdown handleProfileDropdown={handleProfileDropdown} />}
+          {profileOpen && <ProfileDropdown />}
       
           <Web3ReactProvider getLibrary={getLibrary} >
           {wallet && <Wallet closeWallet={closeWallet} setWallet={setWallet} handleWallet={handleWallet} handleBalance={handleBalance} handleDark={handleDark}  />}
@@ -126,5 +127,6 @@ function getLibrary(provider) {
     </div>
    </Web3ReactProvider>
    </AppWrapper>
+
   )
   }

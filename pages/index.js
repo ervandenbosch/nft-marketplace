@@ -57,7 +57,7 @@ return (
             </div>
             </div>
     </div>
-    <div className="mt-20 xs:mt-14">
+    <div className="pt-20 xs:mt-14" id="how-to">
       <h2 className="text-center font-bold text-3xl text-gray-800 dark:text-gray-200 xs:px-10">
       Create and sell your NFTs
       </h2>

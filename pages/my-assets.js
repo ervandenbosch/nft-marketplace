@@ -51,7 +51,7 @@ export default function MyAssets() {
     setLoadingState('loaded') 
   }
   if (loadingState === 'loaded' && !nfts.length) return (
-  <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}><h1 className="text-gray-800 dark:text-gray-300 text-center pt-32 px-20 text-3xl font-bold">No digital assets owned.</h1></div>
+  <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400 pt-32'}><h1 className="text-gray-800 dark:text-gray-300 text-center py-10 text-3xl font-bold">No digital assets owned.</h1></div>
   )
   else if(loadingState === 'not-loaded') return (
 <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>

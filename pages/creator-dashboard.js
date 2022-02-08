@@ -56,14 +56,14 @@ export default function CreatorDashboard() {
     setLoadingState('loaded') 
   }
   if (loadingState === 'loaded' && !nfts.length) return (
-    <div className={(dark ? "dark" : '" "') + ' min-h-screen mt-20 bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
+    <div className={(dark ? "dark" : '" "') + ' min-h-screen pt-32 bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
 
     <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 py-10 text-3xl">No assets created yet..</h1>
     </div>
   )
   else if (loadingState === 'not-loaded') return (
-    <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
-    <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 pt-32 text-3xl">
+    <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400 pt-32'}>
+    <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 py-10 text-3xl">
      Connect a wallet.
    </h1>
    </div>
