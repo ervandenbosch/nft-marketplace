@@ -7,8 +7,7 @@ import { faTwitter, faDiscord, faTelegram } from '@fortawesome/free-brands-svg-i
 import { injected } from './connectors'
 import { useLoginState } from './provider'
 
-
-export function Dropdown({closeAll, handleDark, handleWallet}){
+export function Dropdown({closeAll, handleDark, handleProfileMenu, handleWallet}){
   const [open, setOpen] = useState(false)  
   const [dark, setDark] = useState(false)
   const [wallet, setWallet] = useState(false)
@@ -47,20 +46,14 @@ export function Dropdown({closeAll, handleDark, handleWallet}){
             </a>
           </Link></li>
           <li className="pb-8 pl-10 lg:pl-6">
-          <Link href="./my-assets">
-            <a onClick={closeAll}> 
-              My Digital Assets
-            </a>
-          </Link></li>
-          <li className="pb-8 pl-10 lg:pl-6">
-          <Link href="./creator-dashboard">
+          <Link href="./#how-to">
             <a  onClick={closeAll}>
-              History
+              Resources
             </a>
           </Link></li>
           <li className="pb-8 pl-10 lg:pl-6">
           <Link href="./profile">
-            <a  onClick={closeAll}>
+            <a  onClick={handleProfileMenu}>
               Profile
             </a>
           </Link>

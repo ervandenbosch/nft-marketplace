@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Web3ReactProvider } from '@web3-react/core'
 import Web3 from 'web3'
@@ -11,10 +12,13 @@ import { Footer } from '../components/footer'
 import { Searchbar } from '../components/searchbar'
 import { AppWrapper } from '../components/provider'
 import { ProfileDropdown } from '../components/profiledropdown'
+import { ProfileMenu } from '../components/profilemenu'
+
 
 export default function App({Component, pageProps}){
   const [open, setOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
+  const [profileMenu, setProfileMenu] = useState(false)
   const [wallet, setWallet] = useState(false)
   const [dark, setDark] = useState(false)
   const [balance, setBalance] = useState()
@@ -27,11 +31,14 @@ export default function App({Component, pageProps}){
 
   const handleClose = () => setOpen(false)
   const closeProfileDropdown = () => setProfileOpen(false)
+  const handleProfileMenu = () => setProfileMenu(!profileMenu)
   const handleDark = () => setDark(!dark)
   const handleWallet = () => setWallet(!wallet)
   const closeWallet = () => setWallet(false)
   const handleBalance = () => setBalance(!balance)
  
+  const router = useRouter()
+
   const updateSearch = e => {
     setSearch(e.target.value)
     }
@@ -41,10 +48,15 @@ export default function App({Component, pageProps}){
       setQuery(search)
     }
 
+    function redirect(){
+      router.push("./marketplace");
+      }
+
   function closeAll() {
     handleClose();
     closeProfileDropdown();
     closeWallet();
+    setProfileMenu(false)
   }
 
   function handleOpen() {
@@ -77,7 +89,7 @@ function getLibrary(provider) {
         <a className="lg2:ml-2 text-4xl xs:text-2xl xs:mt-1 font-bold text-blue-500 dark:text-blue-300" onClick={closeAll}>NFTz</a>
           </Link>
           
-          <Searchbar placeholder="Search items.." getSearch={getSearch} updateSearch={updateSearch} query={query} />
+          <Searchbar placeholder="Search items.." getSearch={getSearch} updateSearch={updateSearch} query={query} redirect={redirect} />
           <span className="mt-2 font-bold text-gray-600 dark:text-gray-300 float-right xl:hidden">
           <Link href="./marketplace">
             <a className="mr-8" onClick={closeAll}>
@@ -112,10 +124,13 @@ function getLibrary(provider) {
           </span>
 
           <Web3ReactProvider getLibrary={getLibrary} >
-          {(open && !wallet) && <Dropdown closeAll={closeAll} handleDark={handleDark} handleWallet={handleWallet} />}
+          {(open && !wallet) && <Dropdown closeAll={closeAll} handleDark={handleDark} handleWallet={handleWallet} handleProfileMenu={handleProfileMenu} />}
           </Web3ReactProvider>
 
           {profileOpen && <ProfileDropdown closeAll={closeAll} />}
+
+
+          {profileMenu && <ProfileMenu closeAll={closeAll} handleProfileMenu={handleProfileMenu} />}
       
           <Web3ReactProvider getLibrary={getLibrary} >
           {wallet && <Wallet closeWallet={closeWallet} setWallet={setWallet} handleWallet={handleWallet} handleBalance={handleBalance} handleDark={handleDark}  />}
