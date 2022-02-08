@@ -6,6 +6,8 @@ import { useWeb3React } from "@web3-react/core"
 import { faTwitter, faDiscord, faTelegram } from '@fortawesome/free-brands-svg-icons'  
 import { injected } from './connectors'
 import { useLoginState } from './provider'
+import WalletConnect from "@walletconnect/client"
+import QRCodeModal from "@walletconnect/qrcode-modal";
 
 export function Dropdown({closeAll, handleDark, handleProfileMenu, handleWallet}){
   const [open, setOpen] = useState(false)  
@@ -13,11 +15,15 @@ export function Dropdown({closeAll, handleDark, handleProfileMenu, handleWallet}
   const [wallet, setWallet] = useState(false)
   const [selected, setSelected] = useState(false)
   const [connected, setConnected] = useState()
- 
-  const { active, account, library, connector, activate, deactivate } = useWeb3React()
 
   const information = useLoginState()
   console.log(information);
+
+  // Create a connector
+const connector = new WalletConnect({
+  bridge: "https://bridge.walletconnect.org", // Required
+  qrcodeModal: QRCodeModal,
+});
 
   async function connect() {
     setConnected(true);
@@ -29,6 +35,12 @@ export function Dropdown({closeAll, handleDark, handleProfileMenu, handleWallet}
     
   }
 
+  async function walletConnect() {
+    if (!connector.connected) {
+      // create new session
+      connector.createSession();
+    }
+  }
 
   return (
     <div className={dark ? "dark" : '""'}>
@@ -70,7 +82,11 @@ export function Dropdown({closeAll, handleDark, handleProfileMenu, handleWallet}
          
           {information.balance === undefined &&  <li className="p-8 text-center"><button className="bg-blue-400 dark:bg-gray-100 rounded-xl text-white dark:text-gray-900 w-full p-2" onClick={connect}>
             Connect wallet
-          </button> </li> }
+          </button>
+          <button className="bg-blue-400 dark:bg-gray-100 rounded-xl text-white dark:text-gray-900 w-full p-2 mt-4" onClick={walletConnect}>
+            WalletConnect
+            </button> 
+            </li> }
        
           </ul>
           
