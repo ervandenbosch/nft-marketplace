@@ -73,9 +73,11 @@ async function disconnect(){
             </a>
           </Link></li>
           <li className="pb-8 pl-10 lg:pl-6">
-            <button className="font-bold" onClick={handleProfileMenu}>
+          <Link href="./profile">
+            <a  onClick={closeAll}>
               Profile
-            </button>
+            </a>
+            </Link>
           </li>
           {(information.balanceWC !== undefined || information.balanceMM !== undefined) && <li className="pb-8 pl-10 lg:pl-6">
             <button onClick={handleWallet}>
