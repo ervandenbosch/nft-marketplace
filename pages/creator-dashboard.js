@@ -77,15 +77,17 @@ export default function CreatorDashboard() {
         <div className="flex flex-wrap flex-cols-5 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 justify-center">
           {
             nfts.map((nft, i) => (
-              <div key={i} className="w-64 border rounded-xl overflow-hidden bg-white dark:bg-gray-900">
-              <img src={nft.image} className="h-64 mx-auto rounded" />
-              <div className="flex flex-col p-4 bg-white dark:bg-gray-900 border-t">
-                <div className="flex flex-row justify-between text-gray-400 dark:text-white"> {nft.name}  
-                <div className="text-xs font-bold text-black dark:text-white">Last {nft.price} 
-   <FontAwesomeIcon icon={faEthereum} className="px-1" size="lg"/></div></div>
-                <div className="text-black dark:text-gray-400">{nft.description}</div>
-              </div>
-              </div>
+              <div key={i} className="w-64 border rounded-xl overflow-hidden xs:w-48">
+                <img src={nft.image} className="rounded h-64 mx-auto xs:h-48" />
+                <div className="flex flex-col p-3 bg-white dark:bg-gray-900 border-t">
+                  <div className="flex flex-row justify-between text-2xl xs:text-lg font-semibold dark:text-white"> {nft.name}  
+                  <div className="text-right text-xs font-bold text-gray-500 dark:text-white">Last <br /><div className="flex flex-row text-black pt-1">
+                  <span className="pr-1"> <img src="https://tinyimg.io/i/qd3GlMi.png" width="20px" /></span>{nft.price} 
+        </div></div></div>
+                  <div className="text-gray-400 dark:text-white xs:text-xs">{nft.description}
+                  </div>
+                </div>
+                </div>
             ))
           }
         </div>
@@ -96,13 +98,15 @@ export default function CreatorDashboard() {
         <div className="flex flex-wrap flex-cols-5 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 justify-center">
                 {
                   sold.map((nft, i) => (
-                    <div key={i} className="w-64 border rounded-xl overflow-hidden bg-white dark:bg-gray-900">
-                    <img src={nft.image} className="h-64 mx-auto rounded" />
-                    <div className="flex flex-col p-4 bg-white dark:bg-gray-900 border-t">
-                      <div className="flex flex-row justify-between text-gray-400 dark:text-white"> {nft.name}  
-                      <div className="text-xs font-bold text-black dark:text-white">Last {nft.price} 
-         <FontAwesomeIcon icon={faEthereum} className="px-1" size="lg"/></div></div>
-                      <div className="text-black dark:text-gray-400">{nft.description}</div>
+                    <div key={i} className="w-64 border rounded-xl overflow-hidden xs:w-48">
+                    <img src={nft.image} className="rounded h-64 mx-auto xs:h-48" />
+                    <div className="flex flex-col p-3 bg-white dark:bg-gray-900 border-t">
+                      <div className="flex flex-row justify-between text-2xl xs:text-lg font-semibold dark:text-white"> {nft.name}  
+                      <div className="text-right text-xs font-bold text-gray-500 dark:text-white">Last <br /><div className="flex flex-row text-black pt-1">
+                      <span className="pr-1"> <img src="https://tinyimg.io/i/qd3GlMi.png" width="20px" /></span>{nft.price} 
+            </div></div></div>
+                      <div className="text-gray-400 dark:text-white xs:text-xs">{nft.description}
+                      </div>
                     </div>
                     </div>
                   ))

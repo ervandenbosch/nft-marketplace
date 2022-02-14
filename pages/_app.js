@@ -25,9 +25,6 @@ export default function App({Component, pageProps}){
   const [search, setSearch] = useState("")
   const [query, setQuery] = useState()
   
-  const [currentAccount, setCurrentAccount] = useState(null);
-  const [connected, setConnected] = useState(null)
-
   const handleClose = () => setOpen(false)
   const closeProfileDropdown = () => setProfileOpen(false)
   const handleProfileMenu = () => setProfileMenu(!profileMenu)
@@ -73,12 +70,13 @@ function getLibrary(provider) {
 }
 
   return (
+    
     <AppWrapper dark={dark} search={search}>
     <Web3ReactProvider getLibrary={getLibrary} >
     <div className={(dark ? "dark min-h-screen" : '"min-h-screen"')} id="app">
       
       <nav className="fixed top-0 z-100 h-[76px] w-full flex flex-row flex-nowrap border-b shadow-sm shadow-blue-200 p-4  bg-white dark:bg-gray-900 ">
-      <Link href="/">
+      <Link href="./">
         <a className="lg2:ml-2 text-4xl xs:text-2xl xs:mt-1 font-bold text-blue-500 dark:text-blue-300" onClick={closeAll}>NFTz</a>
           </Link>
           
@@ -116,18 +114,13 @@ function getLibrary(provider) {
           </button>
           </span>
 
-          <Web3ReactProvider getLibrary={getLibrary} >
           {(open && !wallet) && <Dropdown closeAll={closeAll} handleDark={handleDark} handleWallet={handleWallet} handleProfileMenu={handleProfileMenu} />}
-          </Web3ReactProvider>
-
+         
           {profileOpen && <ProfileDropdown closeAll={closeAll} />}
-
 
           {profileMenu && <ProfileMenu closeAll={closeAll} handleProfileMenu={handleProfileMenu} />}
       
-          <Web3ReactProvider getLibrary={getLibrary} >
           {wallet && <Wallet closeWallet={closeWallet} setWallet={setWallet} handleWallet={handleWallet} handleBalance={handleBalance} handleDark={handleDark}  />}
-          </Web3ReactProvider>
         
       </nav>
    
@@ -139,6 +132,7 @@ function getLibrary(provider) {
   <Footer />
     </div>
    </Web3ReactProvider>
+ 
    </AppWrapper>
 
   )

@@ -1,7 +1,7 @@
 module.exports = {
   darkMode: 'class',
-  content: ["./pages/**/*.{html,js}",
-  "./components/**/*.{html,js}",
+  content: ["./pages/**/*.{html,js,ts}",
+  "./components/**/*.{html,js,ts}",
 ],
 theme: {
   screens: {

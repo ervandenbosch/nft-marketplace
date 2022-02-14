@@ -2,11 +2,11 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons'
-import { useWeb3React } from "@web3-react/core"
 import { faTwitter, faDiscord, faTelegram } from '@fortawesome/free-brands-svg-icons'  
 import { injected } from './connectors'
 import { useLoginState } from './provider'
-import WalletConnect from "@walletconnect/client"
+import { useWeb3React } from '@web3-react/core'
+import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
 
 export function Dropdown({closeAll, handleDark, handleProfileMenu, handleWallet}){
@@ -14,37 +14,46 @@ export function Dropdown({closeAll, handleDark, handleProfileMenu, handleWallet}
   const [dark, setDark] = useState(false)
   const [wallet, setWallet] = useState(false)
   const [selected, setSelected] = useState(false)
-  const [connected, setConnected] = useState()
 
   const information = useLoginState()
-  console.log(information);
 
-  // Create a connector
-const connector = new WalletConnect({
-  bridge: "https://bridge.walletconnect.org", // Required
-  qrcodeModal: QRCodeModal,
-});
+  const { active, account, library, connector, activate, deactivate } = useWeb3React()
 
   async function connect() {
-    setConnected(true);
     try {
       await activate(injected)
     } catch (err) {
       console.log(err)
     }
-    
   }
 
-  async function walletConnect() {
-    if (!connector.connected) {
-      // create new session
-      connector.createSession();
-    }
+  const connectorWC = new WalletConnect({
+    bridge: "https://bridge.walletconnect.org", // Required
+    qrcodeModal: QRCodeModal
+  });
+
+  async function wcConnect() {
+  // Check if connection is already established
+    if (!connectorWC.connected) {
+  // create new session
+    connectorWC.createSession();
+    connectorWC.on("connect", (_) =>
+        window.location.reload());
+      }
+  }
+
+async function disconnect(){
+  if (connectorWC.connected) {
+    // create new session
+    connectorWC.killSession();
+    connectorWC.on("disconnect", (_) =>
+        window.location.reload());
+      }
   }
 
   return (
     <div className={dark ? "dark" : '""'}>
-    <div className="fixed top-[76px] right-0 z-99 flex flex-col justify-between text-left w-full lg2:border-blue-100 lg2:w-1/3 lg2:border-l-1 lg2:border-t lg2:drop-shadow-lg bg-white font-bold text-gray-600 dark:bg-gray-900 dark:text-gray-300 h-screen overflow-auto">
+    <div className="fixed top-[76px] right-0 z-99 flex flex-col justify-between text-left w-full lg2:border-blue-100 lg2:w-1/3 lg2:border-l-1 lg2:border-t lg2:drop-shadow-lg bg-white font-bold text-gray-600 dark:bg-gray-900 dark:text-gray-300 h-screen overflow-hidden">
       <div className="mt-6">
       <ul>
       <li className="pb-8 pl-10 lg:pl-6"><Link href="./marketplace">
@@ -68,25 +77,24 @@ const connector = new WalletConnect({
               Profile
             </button>
           </li>
-          {information.balance !== undefined && <li className="pb-8 pl-10 lg:pl-6">
+          {(information.balanceWC !== undefined || information.balanceMM !== undefined) && <li className="pb-8 pl-10 lg:pl-6">
             <button onClick={handleWallet}>
               <b>Wallet</b>
             </button>
           </li>}
           <li className="pl-10 lg:pl-6">
             Night mode
-            <button className="absolute right-6" onClick={handleDark}>
+            <button className="float-right pr-10" onClick={handleDark}>
             <FontAwesomeIcon icon={dark ? faToggleOn : faToggleOff } size="lg" color={dark ? 'gray-200' : 'gray-600'} />
           </button>
           </li>
          
-          {information.balance === undefined &&  <li className="p-8 text-center"><button className="bg-blue-400 dark:bg-gray-100 rounded-xl text-white dark:text-gray-900 w-full p-2" onClick={connect}>
-            Connect wallet
-          </button>
-          <button className="bg-blue-400 dark:bg-gray-100 rounded-xl text-white dark:text-gray-900 w-full p-2 mt-4" onClick={walletConnect}>
-            WalletConnect
-            </button> 
-            </li> }
+          {information.metamaskAccount === undefined && information.walletconnectAccount === undefined && <li className="text-center px-10 lg:px-6 mt-10 w-full">
+<button className="w-full font-bold bg-white border-2 text-left border-blue-400 mb-3 dark:bg-gray-100 rounded-md text-blue-400 dark:text-gray-900 py-3" onClick={connect}> <img src="https://i.ibb.co/9N5w2Hh/metamask.png" className="float-left inline-block mx-4" alt="metamask" width="25px" />Connect with MetaMask
+          </button> 
+          <button className="w-full font-bold text-left bg-white border-2 border-blue-400 dark:bg-gray-100 rounded-md text-blue-400 dark:text-gray-900 py-3" onClick={wcConnect}>  <img className="float-left inline-block mx-4" src="https://i.ibb.co/253FfLx/walletconnect.png" alt="walletconnect" width="25px" />  Connect with WalletConnect 
+          </button></li>
+          }
        
           </ul>
           

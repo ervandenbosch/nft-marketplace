@@ -17,18 +17,16 @@ export default function Marketplace() {
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
 
-  const infoState = useLoginState()
-  console.log(infoState);
-  var query = infoState.search;
-  console.log(query)
+  const information = useLoginState()
+  var search = information.search
 
   useEffect(() => {
     loadNFTs()
-  }, [query])
+  }, [search])
 
   async function loadNFTs() {
     /* create a generic provider and query for unsold market items */
-    const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com")
+    const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.matic.today")
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider)
     const data = await marketContract.fetchMarketItems()
@@ -58,6 +56,7 @@ export default function Marketplace() {
   }
   async function buyNft(nft) {
     /* needs the user to sign the transaction, so will use Web3Provider and sign it */
+  
     const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
@@ -72,7 +71,7 @@ export default function Marketplace() {
     await transaction.wait()
     loadNFTs()
   }
-
+  
   if (loadingState === 'loaded' && !nfts.length) return (
     <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
     <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 pt-32 text-3xl">No items in marketplace yet..</h1></div>
@@ -84,8 +83,8 @@ export default function Marketplace() {
    </h1>
    </div>
   ) 
-  else if (loadingState === 'loaded' && nfts.length && query) {
-let nftsFilter = nfts.filter(nft => nft.name.toLowerCase().includes(query.toLowerCase()));
+  else if (loadingState === 'loaded' && nfts.length) {
+let nftsFilter = nfts.filter(nft => nft.name.toLowerCase().includes(search.toLowerCase()));
 if(nftsFilter.length === 0) {
   return (
     <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
@@ -105,15 +104,17 @@ if(nftsFilter.length === 0) {
               <div key={i} className="w-64 border border-slate-300 dark:border-slate-800 bg-white dark:bg-gray-900 shadow-md hover:shadow-xl rounded-xl overflow-hidden xs:w-48">
                 <img src={nft.image} className="h-64 mx-auto xs:h-48" />
                 <div className="flex flex-row justify-between border-t">
-                  <div className="flex flex-col p-3 dark:bg-">
-                  <p className="text-2xl xs:text-lg font-semibold dark:text-white">{nft.name}</p>
+                  <div className="flex flex-col p-3">
+                  <p className="text-left text-2xl xs:text-lg font-semibold dark:text-white">{nft.name}</p>
                   <div style={{overflow: 'hidden' }}>
-                    <p className="text-gray-400 dark:text-white xs:text-xs">{nft.description}</p>
+                    <p className="text-left pl-1 text-gray-400 dark:text-white xs:text-xs">{nft.description}</p>
                   </div>
                   </div>
-                <div className="p-2 text-sm text-right dark:text-white">
+                <div className="p-2 mt-1 text-sm text-right dark:text-white">
                   Price
-     <div><FontAwesomeIcon icon={faEthereum} className="px-2 text-black" size="lg"/><span className="text-lg xs:text-sm py-1 font-bold text-gray-800 dark:text-white">{nft.price} </span></div>
+                  <div className="flex flex-row text-black font-bold pt-1">
+                  <span className="pr-1"> <img src="https://tinyimg.io/i/qd3GlMi.png" width="20px" /></span>{nft.price} 
+        </div>
                 </div>
               </div>
               </div>
