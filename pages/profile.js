@@ -2,6 +2,9 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
+import WalletConnect from "@walletconnect/client"
+import QRCodeModal from "@walletconnect/qrcode-modal"
+
 import {
   nftmarketaddress, nftaddress
 } from '../config'
@@ -29,6 +32,29 @@ export default function Profile() {
   const handleSoldpage = () => setSoldpage(!soldpage)
 
   const information = useLoginState();
+
+  async function connect() {
+    try {
+      await activate(injected)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const connectorWC = new WalletConnect({
+    bridge: "https://bridge.walletconnect.org", // Required
+    qrcodeModal: QRCodeModal
+  });
+
+  async function wcConnect() {
+  // Check if connection is already established
+    if (!connectorWC.connected) {
+  // create new session
+    connectorWC.createSession();
+    connectorWC.on("connect", (_) =>
+        window.location.reload());
+      }
+  }
 
  const CopyAddress = (e) => {
     let address = e.target.value
@@ -153,13 +179,22 @@ async function loadSoldNFTs() {
 }
 
 return(
+  
 <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-white pt-28'}><h1 className="text-gray-800 dark:text-gray-700 text-center text-3xl font-bold">Profile</h1>
   <div className="flex flex-col text-center m-auto">
 {information.metamaskAccount !== undefined &&
 <div className="text-center mt-6 dark:text-gray-800">
-<button className="hover:cursor-pointer mt-2 rounded-xl border m-auto border-gray-800 w-[120px]" value={information.metamaskAccount} id="address" onClick={CopyAddress} >{information.metamaskAccount.substring(0,6).concat('...').concat(information.metamaskAccount.substring(39,42))}</button>
-<p className="text-xs mt-1 text-gray-400 dark:text-gray-500">Click to Copy
-</p></div>}
+ <img src="https://i.ibb.co/9N5w2Hh/metamask.png" className="inline-block mb-1 mr-3" alt="metamask" width="25px" />
+<button className="hover:cursor-pointer mt-2 rounded-xl border m-auto border-gray-800 w-[120px]" value={information.metamaskAccount} id="address" onClick={CopyAddress} >{information.metamaskAccount.substring(0,6).concat('...').concat(information.metamaskAccount.substring(39,42))}</button><p className="inline-block text-xs ml-2 mt-1 text-gray-400 dark:text-gray-500">Click to Copy
+</p>
+</div>}
+{information.walletconnectAccount !== undefined &&
+<div className="text-center mt-6 dark:text-gray-800">
+<img className="inline-block mb-1 mr-3" src="https://i.ibb.co/253FfLx/walletconnect.png" alt="walletconnect" width="25px" />
+<button className="hover:cursor-pointer mt-2 rounded-xl border m-auto border-gray-800 w-[120px]" value={information.walletconnectAccount} id="address" onClick={CopyAddress} >{information.walletconnectAccount.substring(0,6).concat('...').concat(information.walletconnectAccount.substring(39,42))}</button> <p className="inline-block text-xs ml-2 mt-1 text-gray-400 dark:text-gray-500">Click to Copy
+</p>
+</div>}
+
 </div>
 <div className="flex flex-row justify-center mt-10 px-10">
   <div className={'text-center sm2:w-[120px] text-gray-800 dark:text-gray-300 font-bold px-4 py-3 border border-r-0 border-b-0 rounded-tl-lg border-gray-500 hover:shadow-inner hover:cursor-pointer ' + (collection ? "bg-blue-100 dark:bg-gray-900" : "bg-white")} onClick={loadMyNFTs}>Collection</div>
@@ -171,10 +206,16 @@ return(
     <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400 pt-32'}><h1 className="text-gray-800 dark:text-gray-300 text-center py-10 text-3xl font-bold">No digital assets owned.</h1></div>}
 
 {loadingState === 'not-loaded' && 
-    <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400 pt-32'}>
-    <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 py-10 text-3xl">
+    <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400 pt-24'}>
+    <h1 className={"text-gray-800 dark:text-gray-300 text-center font-bold px-20 pt-10 text-3xl " + ( information.metamaskAccount === undefined && information.walletconnectAccount === undefined ? "hidden" : '""')}>
      Loading..
    </h1>
+   {information.metamaskAccount === undefined && information.walletconnectAccount === undefined && <div className="text-center px-10 lg:px-6 mt-10 w-full">
+<button className="w-full font-bold bg-white border-2 text-left border-blue-400 mb-3 dark:bg-gray-100 rounded-md text-blue-400 dark:text-gray-900 py-3" onClick={connect}> <img src="https://i.ibb.co/9N5w2Hh/metamask.png" className="float-left inline-block mx-4" alt="metamask" width="25px" />Connect with MetaMask
+          </button> 
+          <button className="w-full font-bold text-left bg-white border-2 border-blue-400 dark:bg-gray-100 rounded-md text-blue-400 dark:text-gray-900 py-3" onClick={wcConnect}>  <img className="float-left inline-block mx-4" src="https://i.ibb.co/253FfLx/walletconnect.png" alt="walletconnect" width="25px" />  Connect with WalletConnect 
+          </button></div>
+          }
    </div>}
 
 {collection && loadingState === 'loaded' && nfts.length &&
