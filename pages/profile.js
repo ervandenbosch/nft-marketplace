@@ -161,10 +161,10 @@ return(
 <p className="text-xs mt-1 text-gray-400 dark:text-gray-500">Click to Copy
 </p></div>}
 </div>
-<div className="flex flex-row justify-center mt-10">
-  <div className={'text-center w-[120px] text-gray-800 dark:text-gray-300 font-bold px-4 py-3 border border-r-0 border-b-0 rounded-tl-lg border-gray-500 hover:shadow-inner hover:cursor-pointer ' + (collection ? "bg-blue-100 dark:bg-gray-900" : "bg-white")} onClick={loadMyNFTs}>Collection</div>
-  <div className={'text-center w-[120px] text-gray-800 dark:text-gray-500 font-bold px-4 py-3 border border-r-0 border-b-0 border-gray-400 hover:shadow-inner hover:cursor-pointer ' + (created ? "bg-blue-100 dark:bg-gray-900" : "bg-white")} onClick={loadCreatedNFTs} >Created</div>
-  <div className={'text-center w-[120px] text-gray-800 dark:text-gray-500 font-bold px-4 py-3 border rounded-tr-lg border-b-0  border-gray-400 hover:shadow-inner hover:cursor-pointer ' + (soldpage ? "bg-blue-100 dark:bg-gray-900" : "bg-white")} onClick={loadSoldNFTs} >Sold</div>
+<div className="flex flex-row justify-center mt-10 px-10">
+  <div className={'text-center sm2:w-[120px] text-gray-800 dark:text-gray-300 font-bold px-4 py-3 border border-r-0 border-b-0 rounded-tl-lg border-gray-500 hover:shadow-inner hover:cursor-pointer ' + (collection ? "bg-blue-100 dark:bg-gray-900" : "bg-white")} onClick={loadMyNFTs}>Collection</div>
+  <div className={'text-center sm2:w-[120px] text-gray-800 dark:text-gray-500 font-bold px-4 py-3 border border-r-0 border-b-0 border-gray-400 hover:shadow-inner hover:cursor-pointer ' + (created ? "bg-blue-100 dark:bg-gray-900" : "bg-white")} onClick={loadCreatedNFTs} >Created</div>
+  <div className={'text-center sm2:w-[120px] text-gray-800 dark:text-gray-500 font-bold px-4 py-3 border rounded-tr-lg border-b-0  border-gray-400 hover:shadow-inner hover:cursor-pointer ' + (soldpage ? "bg-blue-100 dark:bg-gray-900" : "bg-white")} onClick={loadSoldNFTs} >Sold</div>
 </div>
 <div className="">
 {collection && loadingState === 'loaded' && !nfts.length &&
