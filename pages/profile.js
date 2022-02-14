@@ -203,7 +203,7 @@ return(
 </div>
 <div className="">
 {collection && loadingState === 'loaded' && !nfts.length &&
-    <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400 pt-32'}><h1 className="text-gray-800 dark:text-gray-300 text-center py-10 text-3xl font-bold">No digital assets owned.</h1></div>}
+    <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400 pt-32'}><h1 className="text-gray-800 dark:text-gray-300 text-center p-10 text-3xl font-bold">No digital assets owned.</h1></div>}
 
 {loadingState === 'not-loaded' && 
     <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400 pt-24'}>
@@ -245,6 +245,9 @@ return(
     </div>
   }
 
+{created && loadingState === 'loaded' && !nfts.length &&
+    <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400 pt-32'}><h1 className="text-gray-800 dark:text-gray-300 text-center p-10 text-3xl font-bold">No digital assets created.</h1></div>}
+
 {created && loadingState === 'loaded' && nfts.length && 
 <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-600'}>
             <div className="p-8" style={{ maxWidth: '1600px' }}>
@@ -268,6 +271,10 @@ return(
               </div>   
               </div> 
         }
+
+{soldpage && loadingState === 'loaded' && !sold.length &&
+    <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400 pt-32'}><h1 className="text-gray-800 dark:text-gray-300 text-center p-10 text-3xl font-bold">No digital assets sold.</h1></div>}
+
 {soldpage && loadingState === 'loaded' && sold.length &&
 <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-600'}>
             <div className="p-8" style={{ maxWidth: '1600px' }}>
