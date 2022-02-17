@@ -98,7 +98,7 @@ function getLibrary(provider) {
             </a>
           </Link>
           </span>
-          <span className="md:relative my-1 px-8 sm:px-4 sm:pl-0 xl2:px-4">
+          <span className="md:relative my-1 pr-8 pl-6 sm:px-4 sm:pl-0 xl2:px-4">
             <button onClick={!profileOpen ? handleProfileDropdown : closeAll}>
             <FontAwesomeIcon icon={faUserCircle} size="2x" className={dark ? "text-gray-200" : "text-gray-600"} />
             </button>

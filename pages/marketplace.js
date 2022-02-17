@@ -133,24 +133,28 @@ if(nftsFilter.length === 0) {
   return (
     <div className={(dark ? "dark" : '" "') + ' bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-600 min-h-screen'}>  <div className=" pt-20 mb-10 flex justify-center">
       <div className="p-4" style={{ maxWidth: '1600px' }}>
+      <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold py-5 text-3xl">
+     Items for sale
+   </h1>
         <div className="flex flex-wrap flex-cols-5 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 justify-center">
           {
             nftsFilter.map((nft, i) => (
               <button onClick={() => buyNft(nft)}>
-              <div key={i} className="w-64 border border-slate-300 dark:border-slate-800 bg-white dark:bg-gray-900 shadow-md hover:shadow-xl rounded-xl overflow-hidden xs:w-48">
-                <img src={nft.image} className="h-64 mx-auto xs:h-48" />
+              <div key={i} className="w-48 border border-slate-300 dark:border-slate-800 bg-white dark:bg-gray-900 shadow-md hover:shadow-xl rounded-xl overflow-hidden xs:w-48">
+                <img src={nft.image} className="h-48 mx-auto xs:h-32" />
                 <div className="flex flex-row justify-between border-t">
-                  <div className="flex flex-col p-3">
-                  <p className="text-left text-2xl xs:text-lg font-semibold dark:text-white">{nft.name}</p>
+                  <div className="flex flex-col px-3 py-2 pb-4">
+                  <p className="text-left text-lg xs:text-md font-semibold dark:text-white">{nft.name}</p>
                   <div style={{overflow: 'hidden' }}>
-                    <p className="text-left pl-1 text-gray-400 dark:text-white xs:text-xs">{nft.description}</p>
+                    <p className="text-left pl-1 text-gray-400 dark:text-white text-xs">{nft.description}</p>
                   </div>
                   </div>
-                <div className="p-2 mt-1 text-sm text-right dark:text-white">
+                <div className="p-2 mt-1 text-xs text-right dark:text-white">
                   Price
-                  <div className="flex flex-row text-black font-bold pt-1">
-                  <span className="pr-1"> <img src="https://tinyimg.io/i/qd3GlMi.png" width="20px" /></span>{nft.price} 
-        </div>
+                  <div className="flex flex-row text-black font-bold pt-1 text-sm">
+                  <span className="pr-1">
+                    <img src="https://tinyimg.io/i/qd3GlMi.png" width="20px" /></span>{nft.price} 
+              </div>
                 </div>
               </div>
               </div>
@@ -172,8 +176,8 @@ return (
           {
             nfts.map((nft, i) => (
               <button onClick={() => buyNft(nft)}>
-              <div key={nft} className="w-64 border border-slate-300 dark:border-slate-800 bg-white dark:bg-gray-900 shadow-md hover:shadow-xl rounded-xl overflow-hidden xs:w-48">
-                <img src={nft.image} className="h-64 mx-auto xs:h-48" />
+              <div key={nft} className="w-48 border border-slate-300 dark:border-slate-800 bg-white dark:bg-gray-900 shadow-md hover:shadow-xl rounded-xl overflow-hidden xs:w-48">
+                <img src={nft.image} className="h-48 mx-auto xs:h-48" />
                 <div className="flex flex-row justify-between border-t">
                   <div className="flex flex-col p-3 dark:bg-">
                   <p className="text-2xl xs:text-lg font-semibold dark:text-white">{nft.name}</p>
