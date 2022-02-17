@@ -53,7 +53,7 @@ async function disconnect(){
 
   return (
     <div className={dark ? "dark" : '""'}>
-    <div className="fixed top-[76px] right-0 z-99 flex flex-col justify-between text-left w-full lg2:border-blue-100 lg2:w-1/3 lg2:border-l-1 lg2:border-t lg2:drop-shadow-lg bg-white font-bold text-gray-600 dark:bg-gray-900 dark:text-gray-300 h-screen overflow-hidden">
+    <div className="fixed top-[76px] right-0 z-99 flex flex-col justify-between text-left w-full lg2:border-blue-100 lg2:w-2/5 lg2:max-w-[450px] lg2:border-l-1 lg2:border-t lg2:drop-shadow-lg bg-white font-bold text-gray-600 dark:bg-gray-900 dark:text-gray-300 h-screen overflow-hidden">
       <div className="mt-6">
       <ul>
       <li className="pb-8 pl-10 lg:pl-6"><Link href="./marketplace">

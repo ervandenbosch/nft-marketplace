@@ -22,7 +22,6 @@ export default function Marketplace() {
   const [open, setOpen] = useState(false)
 
   const router = useRouter()
-  
   const information = useLoginState()
   var search = information.search
 
