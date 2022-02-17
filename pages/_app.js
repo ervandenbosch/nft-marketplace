@@ -77,7 +77,7 @@ function getLibrary(provider) {
       
       <nav className="fixed top-0 z-100 h-[76px] w-full flex flex-row flex-nowrap border-b shadow-sm shadow-blue-200 p-4  bg-white dark:bg-gray-900 ">
       <Link href="./">
-        <a className="lg2:ml-2 text-4xl xs:text-2xl xs:mt-1 font-bold text-blue-500 dark:text-blue-300" onClick={closeAll}>NFTz</a>
+        <a className="mr-1 lg2:ml-2 " onClick={closeAll}><img src="https://tinyimg.io/i/BwYKN7c.png" width="44px"/></a>
           </Link>
         
           <Searchbar placeholder="Search.." updateSearch={updateSearch} query={query} closeAll={closeAll} />

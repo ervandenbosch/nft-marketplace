@@ -8,9 +8,9 @@ export default function Home(){
 const [dark, setDark] = useState(false)
 
 return (
-  <div className={(dark ? "dark" : '" "') + ' bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-600'}>
-    <div className="pt-20 flex flex-row justify-between md:justify-center md:flex-wrap">
-    <div className="flex flex-col md:text-center flex-none w-2/5 md:w-2/3 ml-10 md:ml-0 mt-20 md:mt-10 xs:w-4/5">
+  <div className={(dark ? "dark" : '" "') + '  dark:from-gray-900 dark:to-gray-600'}>
+    <div className="bg-gradient-to-t from-blue-100 to-white py-20 flex flex-row justify-between md:justify-center md:flex-wrap">
+    <div className="flex flex-col md:text-center flex-none w-2/5 md:w-2/3 ml-10 md:ml-0 mt-20 md:mt-14 xs:w-4/5">
       <h1 className="font-bold text-5xl lg:text-4xl text-gray-800  dark:text-gray-300 xl2:mt-12">
         Discover, collect, and sell extraordinary NFTs</h1><br />
       <h2 className="text-2xl text-gray-800 dark:text-gray-300 pr-4">NFTz is the most notorious digital asset marketplace on the web</h2>
@@ -33,7 +33,7 @@ return (
     </div>
     </Link>
   </div>
-  <div className="mt-20 xs:mt-14">
+  <div className="mt-16 xs:mt-14">
       <h2 className="text-center font-bold text-3xl text-gray-800 dark:text-gray-200">
         Notable Drops
       </h2>
