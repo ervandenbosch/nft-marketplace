@@ -16,10 +16,11 @@ const { active, account, library, connector, activate, deactivate } = useWeb3Rea
 
 const web3 = new Web3(new Web3.providers.HttpProvider("https://rpc-mumbai.matic.today"));
 
+const connectorWC = new WalletConnect({
+  bridge: "https://bridge.walletconnect.org"// Required
+});
+
 async function checkWalletIsConnected() {
-  const connectorWC = new WalletConnect({
-    bridge: "https://bridge.walletconnect.org"// Required
-  });
   if (window.ethereum) {
     const accountsMM = await ethereum.request({ method: 'eth_accounts'})
     if (accountsMM.length !== 0) {
