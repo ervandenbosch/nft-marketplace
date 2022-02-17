@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { ethers } from 'ethers'
 import { providers } from "ethers"
 import { useEffect, useState } from 'react'
@@ -14,12 +15,14 @@ import {
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
 import Market from '../artifacts/contracts/Market.sol/NFTMarket.json'
 
-export default function Marketplace({handleOpen}) {
+export default function Marketplace() {
   const [dark, setDark] = useState(false)
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
   const [open, setOpen] = useState(false)
 
+  const router = useRouter()
+  
   const information = useLoginState()
   var search = information.search
 
@@ -87,6 +90,7 @@ export default function Marketplace({handleOpen}) {
     } else if(information.metamaskAccount !== undefined){ 
       var provider = new ethers.providers.Web3Provider(window.ethereum)
     } else {
+      router.push("./profile")
       return;
     }
     const signer = provider.getSigner()

@@ -271,7 +271,7 @@ return(
     <h1 className={"text-gray-800 dark:text-gray-300 text-center font-bold px-20 pt-10 text-3xl " + ( information.metamaskAccount === undefined && information.walletconnectAccount === undefined ? "hidden" : '""')}>
      Loading..
    </h1>
-   {information.metamaskAccount === undefined && information.walletconnectAccount === undefined && <div className="text-center m-auto px-10 lg:px-6 mt-10 w-full lg2:w-1/3">
+   {information.metamaskAccount === undefined && information.walletconnectAccount === undefined && <div className="text-center m-auto px-10 lg:px-6 mt-10 max-w-[450px]">
 <button className="w-full font-bold bg-white border-2 text-left border-blue-400 mb-3 dark:bg-gray-100 rounded-md text-blue-400 dark:text-gray-900 py-3" onClick={connect}> <img src="https://i.ibb.co/9N5w2Hh/metamask.png" className="float-left inline-block mx-4" alt="metamask" width="25px" />Connect with MetaMask
           </button> 
           <button className="w-full font-bold text-left bg-white border-2 border-blue-400 dark:bg-gray-100 rounded-md text-blue-400 dark:text-gray-900 py-3" onClick={wcConnect}>  <img className="float-left inline-block mx-4" src="https://i.ibb.co/253FfLx/walletconnect.png" alt="walletconnect" width="25px" />Connect with WalletConnect 
