@@ -1,7 +1,9 @@
 import { ethers } from 'ethers'
+import { providers } from "ethers"
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
+import WalletConnectProvider from "@walletconnect/web3-provider"
 
 import {
   nftmarketaddress, nftaddress
@@ -20,6 +22,22 @@ export default function CreatorDashboard() {
 
   const information = useLoginState();
   
+  const providerOptions = {
+    walletconnect: {
+      display: {
+        name: "Mobile"
+      },
+      package: WalletConnectProvider,
+      options: {
+        infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
+        rpc: {
+          80001: "https://rpc-mumbai.matic.today"
+          // ...
+        },
+      },
+    }
+  };
+
   useEffect(() => {
     loadNFTs()
   }, [])
@@ -27,6 +45,7 @@ export default function CreatorDashboard() {
     const web3Modal = new Web3Modal({
       network: "mainnet",
       cacheProvider: true,
+      providerOptions // required
     })
     if(information.walletconnectAccount !== undefined){
       var connection = await web3Modal.connectTo("walletconnect");
