@@ -23,7 +23,7 @@ return (
       </div>
     </div>
     <Link href="./marketplace">
-    <div className="flex flex-col justify-center mr-6 md:mr-0 mt-12 w-1/2 sm:w-2/3 rounded-md hover:cursor-pointer ">
+    <div className="flex flex-col justify-center mr-6 md:mr-0 mt-12 w-1/2 xs:w-full xs:px-16 rounded-md hover:cursor-pointer ">
       <img src="https://cdn.vox-cdn.com/thumbor/KMraJbkqzbkEAUuTqU5Tvt_1So4=/0x0:3000x3000/1820x1213/filters:focal(1260x1260:1740x1740):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/68948366/2021_NYR_20447_0001_001_beeple_everydays_the_first_5000_days034733_.0.jpg" alt="home_nft" className="rounded-t-md" />
       <div className="bg-white border border-slate-300 dark:border-slate-800 dark:bg-black rounded-b-md max-h-min shadow-lg shadow-slate-300 hover:shadow-xl dark:shadow-slate-700">
         <p className="text-gray-700 dark:text-white text-center p-4">
@@ -37,7 +37,7 @@ return (
       <h2 className="text-center font-bold text-3xl text-gray-800 dark:text-gray-200">
         Notable Drops
       </h2>
-      <div className="flex flex-rows-2 justify-center flex-wrap mt-10 xs:px-2">
+      <div className="flex flex-rows-2 justify-center flex-wrap mt-10 xs:px-4">
       <div className="flex flex-col border shadow-xl rounded-xl overflow-hidden max-w-xs m-5">
               <img src="https://static01.nyt.com/images/2021/03/11/arts/11nft-auction3/merlin_184196610_cd2f1557-7871-4004-bca0-004ee1f1f7d6-superJumbo.jpg?quality=75&auto=webp" alt="drops" />
               <div className="flex flex-col bg-black h-full place-content-center p-6">

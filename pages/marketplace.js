@@ -115,8 +115,9 @@ export default function Marketplace() {
   else if (loadingState === 'not-loaded') return (
     <div className={(dark ? "dark" : '" "') + ' min-h-screen bg-gradient-to-b from-blue-100 to-white dark:from-gray-900 dark:to-gray-400'}>
     <h1 className="text-gray-800 dark:text-gray-300 text-center font-bold px-20 pt-32 text-3xl">
-     Loading...
+  Loading...
    </h1>
+
    </div>
   ) 
   else if (loadingState === 'loaded' && nfts.length) {
