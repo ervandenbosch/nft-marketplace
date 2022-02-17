@@ -37,7 +37,7 @@ return (
       <h2 className="text-center font-bold text-3xl text-gray-800 dark:text-gray-200">
         Notable Drops
       </h2>
-      <div className="flex flex-rows-2 justify-center flex-wrap mt-10">
+      <div className="flex flex-rows-2 justify-center flex-wrap mt-10 xs:px-4">
       <div className="flex flex-col border shadow-xl rounded-xl overflow-hidden max-w-xs m-5">
               <img src="https://static01.nyt.com/images/2021/03/11/arts/11nft-auction3/merlin_184196610_cd2f1557-7871-4004-bca0-004ee1f1f7d6-superJumbo.jpg?quality=75&auto=webp" alt="drops" />
               <div className="flex flex-col bg-black h-full place-content-center p-6">
