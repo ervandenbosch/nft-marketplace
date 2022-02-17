@@ -1,9 +1,13 @@
 import { ethers } from 'ethers'
+import { providers } from "ethers"
+import { injected } from "../components/connectors"
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
+import { useWeb3React } from '@web3-react/core'
 import WalletConnect from "@walletconnect/client"
 import QRCodeModal from "@walletconnect/qrcode-modal"
+import WalletConnectProvider from "@walletconnect/web3-provider"
 
 import {
   nftmarketaddress, nftaddress
@@ -32,19 +36,42 @@ export default function Profile() {
   const handleSoldpage = () => setSoldpage(!soldpage)
 
   const information = useLoginState();
-
-  async function connect() {
-    try {
-      await activate(injected)
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  
+  const { active, account, library, connector, activate, deactivate } = useWeb3React()
 
   const connectorWC = new WalletConnect({
     bridge: "https://bridge.walletconnect.org", // Required
     qrcodeModal: QRCodeModal
   });
+
+  const providerOptions = {
+    walletconnect: {
+      display: {
+        name: "Mobile"
+      },
+      package: WalletConnectProvider,
+      options: {
+        infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
+        rpc: {
+          80001: "https://rpc-mumbai.matic.today"
+          // ...
+        },
+      },
+    }
+  };
+ 
+  async function connect() {
+    if (!window.ethereum) {
+      alert("Get MetaMask!");
+      return;
+    } else { 
+      try {
+        await activate(injected)
+      } catch (ex) {
+        console.log(ex)
+      }
+    }
+  }
 
   async function wcConnect() {
   // Check if connection is already established
@@ -74,15 +101,25 @@ async function loadMyNFTs() {
   setCollection(true)
 
   const web3Modal = new Web3Modal({
-      network: "mainnet",
-      cacheProvider: true,
-    })
-    const connection = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)
-    const signer = provider.getSigner()
+    network: "mainnet", // optional
+    cacheProvider: true, // optional
+    providerOptions // required
+  });
 
+  if(information.walletconnectAccount !== undefined && information.walletconnectAccount !== null){
+    var connection = await web3Modal.connectTo("walletconnect");
+    console.log(connection)
+    var provider = new providers.Web3Provider(connection);
+    console.log(provider)
+  } else if(information.metamaskAccount){ 
+    var provider = new ethers.providers.Web3Provider(window.ethereum)
+  } else {
+    return;
+  }
+    let signer = provider.getSigner()
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
+ 
     const data = await marketContract.fetchMyNFTs()
 
     const items = await Promise.all(data.map(async i => {
@@ -91,6 +128,7 @@ async function loadMyNFTs() {
       let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
       let item = {
         price,
+        itemId: i.itemId.toNumber(),
         tokenId: i.tokenId.toNumber(),
         seller: i.seller,
         owner: i.owner,
@@ -108,12 +146,24 @@ async function loadCreatedNFTs() {
   setCollection(false)
   setSoldpage(false)
   setCreated(true)
+
   const web3Modal = new Web3Modal({
-    network: "mainnet",
-    cacheProvider: true,
-  })
-  const connection = await web3Modal.connect()
-  const provider = new ethers.providers.Web3Provider(connection)
+    network: "mainnet", // optional
+    cacheProvider: true, // optional
+    providerOptions // required
+  });
+
+  if(information.walletconnectAccount !== undefined && information.walletconnectAccount !== null){
+    var connection = await web3Modal.connectTo("walletconnect");
+    console.log(connection)
+    var provider = new providers.Web3Provider(connection);
+    console.log(provider)
+  } else if(information.metamaskAccount){ 
+    var provider = new ethers.providers.Web3Provider(window.ethereum)
+  } else {
+    return;
+  }
+
   const signer = provider.getSigner()
 
   const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
@@ -144,12 +194,23 @@ async function loadSoldNFTs() {
   setCollection(false)
   setCreated(false)
   setSoldpage(true)
+
   const web3Modal = new Web3Modal({
-    network: "mainnet",
-    cacheProvider: true,
-  })
-  const connection = await web3Modal.connect()
-  const provider = new ethers.providers.Web3Provider(connection)
+    network: "mainnet", // optional
+    cacheProvider: true, // optional
+    providerOptions // required
+  });
+
+  if(information.walletconnectAccount !== undefined){
+    var connection = await web3Modal.connectTo("walletconnect");
+    console.log(connection)
+    var provider = new providers.Web3Provider(connection);
+    console.log(provider)
+  } else if(information.metamaskAccount){ 
+    var provider = new ethers.providers.Web3Provider(window.ethereum)
+  } else {
+    return;
+  }
   const signer = provider.getSigner()
 
   const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
@@ -210,10 +271,10 @@ return(
     <h1 className={"text-gray-800 dark:text-gray-300 text-center font-bold px-20 pt-10 text-3xl " + ( information.metamaskAccount === undefined && information.walletconnectAccount === undefined ? "hidden" : '""')}>
      Loading..
    </h1>
-   {information.metamaskAccount === undefined && information.walletconnectAccount === undefined && <div className="text-center px-10 lg:px-6 mt-10 w-full">
+   {information.metamaskAccount === undefined && information.walletconnectAccount === undefined && <div className="text-center m-auto px-10 lg:px-6 mt-10 w-full lg2:w-1/3">
 <button className="w-full font-bold bg-white border-2 text-left border-blue-400 mb-3 dark:bg-gray-100 rounded-md text-blue-400 dark:text-gray-900 py-3" onClick={connect}> <img src="https://i.ibb.co/9N5w2Hh/metamask.png" className="float-left inline-block mx-4" alt="metamask" width="25px" />Connect with MetaMask
           </button> 
-          <button className="w-full font-bold text-left bg-white border-2 border-blue-400 dark:bg-gray-100 rounded-md text-blue-400 dark:text-gray-900 py-3" onClick={wcConnect}>  <img className="float-left inline-block mx-4" src="https://i.ibb.co/253FfLx/walletconnect.png" alt="walletconnect" width="25px" />  Connect with WalletConnect 
+          <button className="w-full font-bold text-left bg-white border-2 border-blue-400 dark:bg-gray-100 rounded-md text-blue-400 dark:text-gray-900 py-3" onClick={wcConnect}>  <img className="float-left inline-block mx-4" src="https://i.ibb.co/253FfLx/walletconnect.png" alt="walletconnect" width="25px" />Connect with WalletConnect 
           </button></div>
           }
    </div>}

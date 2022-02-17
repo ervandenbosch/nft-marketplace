@@ -124,9 +124,9 @@ function getLibrary(provider) {
         
       </nav>
    
-        <div onClick={select}>
+        <div onClick={select} >
       
-      <Component {...pageProps}  />
+      <Component {...pageProps}  handleOpen={handleOpen} />
       </div>
       
   <Footer />

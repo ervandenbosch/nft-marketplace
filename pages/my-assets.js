@@ -2,8 +2,6 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEthereum } from '@fortawesome/free-brands-svg-icons'
 
 import {
   nftmarketaddress, nftaddress
@@ -12,10 +10,14 @@ import {
 import Market from '../artifacts/contracts/Market.sol/NFTMarket.json'
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
 
+import { useLoginState } from '../components/provider'
+
 export default function MyAssets() {
   const [dark, setDark] = useState(false)
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
+
+  const information = useLoginState();
 
   useEffect(() => {
     loadNFTs()
@@ -25,8 +27,16 @@ export default function MyAssets() {
       network: "mainnet",
       cacheProvider: true,
     })
-    const connection = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)
+    if(information.walletconnectAccount !== undefined){
+      var connection = await web3Modal.connectTo("walletconnect");
+      console.log(connection)
+      var provider = new providers.Web3Provider(connection);
+      console.log(provider)
+    } else if(information.metamaskAccount){ 
+      var provider = new ethers.providers.Web3Provider(window.ethereum)
+    } else {
+      return;
+    }
     const signer = provider.getSigner()
 
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
@@ -86,7 +96,5 @@ export default function MyAssets() {
       </div>
     </div>
     </div>
-  
-    
   )
 }

@@ -66,8 +66,8 @@ export function Wallet({closeWallet}){
           Back
         </button>
         </div>
-      {information.metamaskAccount !== undefined && <div className="absolute right-10"><p>{information.metamaskAccount.substring(0,6).concat('...').concat(information.metamaskAccount.substring(39,42))}</p></div>}
-      {information.walletconnectAccount !== undefined && <div className="absolute right-10"><p>{information.walletconnectAccount.substring(0,6).concat('...').concat(information.walletconnectAccount.substring(39,42))}</p></div>}
+      {information.metamaskAccount !== undefined && <div className="absolute right-10"><p><img src="https://i.ibb.co/9N5w2Hh/metamask.png" className="float-left inline-block mr-2" alt="metamask" width="25px" />{information.metamaskAccount.substring(0,6).concat('...').concat(information.metamaskAccount.substring(39,42))}</p></div>}
+      {information.walletconnectAccount !== undefined && <div className="absolute right-10"><p><img className="float-left inline-block m-1 mr-2" src="https://i.ibb.co/253FfLx/walletconnect.png" alt="walletconnect" width="25px" />{information.walletconnectAccount.substring(0,6).concat('...').concat(information.walletconnectAccount.substring(39,42))}</p></div>}
       </div>
       <div className="flex flex-col">
         {information.metamaskAccount === undefined && information.walletconnectAccount === undefined && <div className="text-center px-10 mt-10 w-full">
@@ -79,7 +79,7 @@ export function Wallet({closeWallet}){
 </div>
 {information.walletconnectAccount !== undefined && 
 <div className="">
-<div className={"w-2/3 flex flex-row m-auto border border-gray-400 rounded-t-lg " + (balance ? 'hidden' : '""')}>
+<div className={"w-2/3 flex flex-row mt-24 m-auto border border-gray-400 rounded-t-lg " + (balance ? 'hidden' : '""')}>
 <div className="w-full flex flex-row">
       <div className="p-3">
         <img src="https://tinyimg.io/i/qd3GlMi.png" width="20px" /></div>

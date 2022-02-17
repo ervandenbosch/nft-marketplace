@@ -1,7 +1,9 @@
 import { ethers } from 'ethers'
+import { providers } from "ethers"
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
+import WalletConnectProvider from "@walletconnect/web3-provider"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEthereum } from '@fortawesome/free-brands-svg-icons'
 import { useLoginState } from '../components/provider'
@@ -12,17 +14,34 @@ import {
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
 import Market from '../artifacts/contracts/Market.sol/NFTMarket.json'
 
-export default function Marketplace() {
+export default function Marketplace({handleOpen}) {
   const [dark, setDark] = useState(false)
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
+  const [open, setOpen] = useState(false)
 
   const information = useLoginState()
   var search = information.search
 
+  const providerOptions = {
+    walletconnect: {
+      display: {
+        name: "Mobile"
+      },
+      package: WalletConnectProvider,
+      options: {
+        infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
+        rpc: {
+          80001: "https://rpc-mumbai.matic.today"
+          // ...
+        },
+      },
+    }
+  };
+
   useEffect(() => {
     loadNFTs()
-  }, [search])
+  }, [])
 
   async function loadNFTs() {
     /* create a generic provider and query for unsold market items */
@@ -41,6 +60,7 @@ export default function Marketplace() {
       let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
       let item = {
         price,
+        itemId: i.itemId.toNumber(),
         tokenId: i.tokenId.toNumber(),
         seller: i.seller,
         owner: i.owner,
@@ -55,20 +75,33 @@ export default function Marketplace() {
     setLoadingState('loaded') 
   }
   async function buyNft(nft) {
+    const web3Modal = new Web3Modal({
+      network: "mainnet", // optional
+      cacheProvider: true, // optional
+      providerOptions // required
+    });
     /* needs the user to sign the transaction, so will use Web3Provider and sign it */
-  
-    const web3Modal = new Web3Modal()
-    const connection = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)
+    if(information.walletconnectAccount !== undefined){
+      var connection = await web3Modal.connectTo("walletconnect");
+      var provider = new providers.Web3Provider(connection);
+    } else if(information.metamaskAccount !== undefined){ 
+      var provider = new ethers.providers.Web3Provider(window.ethereum)
+    } else {
+      return;
+    }
     const signer = provider.getSigner()
     const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
-
     /* user will be prompted to pay the asking proces to complete the transaction */
     const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')   
-    const transaction = await contract.createMarketSale(nftaddress, nft.tokenId, {
+    const transaction = await contract.createMarketSale(nftaddress, nft.itemId, {
       value: price
     })
+    console.log(transaction)
+    try{
     await transaction.wait()
+    } catch (err) {
+      console.log(err)
+    }
     loadNFTs()
   }
   

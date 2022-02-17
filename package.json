@@ -12,6 +12,8 @@
     "@fortawesome/free-brands-svg-icons": "^6.0.0-beta3",
     "@fortawesome/free-solid-svg-icons": "^6.0.0-beta3",
     "@fortawesome/react-fontawesome": "^0.1.16",
+    "@maticnetwork/maticjs": "^3.2.2",
+    "@maticnetwork/walletconnect-provider": "^0.0.1-beta.1",
     "@metamask/onboarding": "^1.0.1",
     "@openzeppelin/contracts": "^4.4.2",
     "@react-native-async-storage/async-storage": "^1.16.1",
