@@ -79,8 +79,8 @@ function getLibrary(provider) {
       <Link href="./">
         <a className="lg2:ml-2 text-4xl xs:text-2xl xs:mt-1 font-bold text-blue-500 dark:text-blue-300" onClick={closeAll}>NFTz</a>
           </Link>
-          
-          <Searchbar placeholder="Search items.." updateSearch={updateSearch} query={query} closeAll={closeAll} />
+        
+          <Searchbar placeholder="Search.." updateSearch={updateSearch} query={query} closeAll={closeAll} />
           <span className="mt-2 font-bold text-gray-600 dark:text-gray-300 float-right xl:hidden">
           <Link href="./marketplace">
             <a className="mr-8" onClick={closeAll}>
@@ -98,7 +98,7 @@ function getLibrary(provider) {
             </a>
           </Link>
           </span>
-          <span className="md:relative my-1 px-8 sm:pl-4 xl2:px-4">
+          <span className="md:relative my-1 px-8 sm:px-4 sm:pl-0 xl2:px-4">
             <button onClick={!profileOpen ? handleProfileDropdown : closeAll}>
             <FontAwesomeIcon icon={faUserCircle} size="2x" className={dark ? "text-gray-200" : "text-gray-600"} />
             </button>

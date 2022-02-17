@@ -9,7 +9,7 @@ export function Searchbar({closeAll, placeholder, updateSearch, search}){
     <div className="flex-1 w-full">
        <form>
        <div className="flex flex-row">
-       <div className="min-w-xs grow xl2:ml-60 border hover:drop-shadow dark:border-none py-2 h-[40px] mx-6 rounded-lg font-bold bg-white dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-400" onClick={closeAll}>
+       <div className="min-w-xs grow sm:ml-4 xl2:ml-60 border hover:drop-shadow dark:border-none py-2 h-[40px] mx-6 rounded-lg font-bold bg-white dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-400" onClick={closeAll}>
        <FontAwesomeIcon icon={faMagnifyingGlass} color="text-gray-600" className="px-2"/>
     <input type="text" placeholder={placeholder} className="w-3/4 bg-transparent outline-none" value={search} onChange={updateSearch} />
     </div>
